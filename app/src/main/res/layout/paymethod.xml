@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hq.dely.Register"
+    android:background="@drawable/orangefinal">
+
+    <ProgressBar
+        android:id="@+id/paypbar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:background="@drawable/iconsized"/>
+
+    <RadioGroup
+        android:id="@+id/rgpaym"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:id="@+id/rbmpesa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mpesa" />
+
+        <RadioButton
+            android:id="@+id/rbairtel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Airtel Money" />
+
+        <RadioButton
+            android:id="@+id/rbeazzypay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Eazzypay" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvpaym"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:text="good"
+        android:background="@color/blackhex"
+        android:layout_below="@+id/rgpaym"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/btpaym"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvpaym"
+        android:background="@color/colorAccent"
+        android:text="Done"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

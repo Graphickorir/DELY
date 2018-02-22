@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">DELY</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_sign_up">SignUp</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_home">Home</string>
+    <string name="mpesa">
+         How to pay for DELY services via M-Pesa (Safaricom)\n
+        \n
+        ->Select “Pay Bill” from the M-Pesa menu\n
+        ->Enter DELY business number (540540)\n
+        ->Enter your Phone number\n
+        ->Enter the amount you wish to pay \n
+        ->Enter your M-Pesa PIN\n
+        Done
+    </string>
+    <string name="airtel">
+        How to pay for DELY services via Airtel Money (Airtel)\n
+        \n
+        ->Select Airtel Money on your menu\n
+        ->Select Make Payments\n
+        ->Select Paybill\n
+        ->Select other\n
+        ->Enter Business name DELY\n
+        ->Enter the amount in Kshs you want to pay\n
+        ->Enter your secret Airtel Money PIN\n
+        ->Under reference, enter DELY Account number\n
+        Done
+    </string>
+    <string name="eazypay">
+        How to pay for DELY services via Eazzy Pay (Equity)\n
+        \n
+        ->Log in to Eazzy Banking app\n
+        ->Click on the +(plus) sign\n
+        ->Select Eazzy Pay\n
+        ->Select Pay Bill\n
+        ->Type company name (DELY)and select appropriately\n
+        ->Enter the bill account number (540540)\n
+        ->Enter amount\n
+        ->Confirm transaction\n
+        Done
+    </string>
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/co_cv"
+    android:layout_width="375dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginStart="5dp"
+    app:layout_goneMarginBottom="5dp"
+    app:cardBackgroundColor="@color/blackshade"
+    android:elevation="8dp">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/ivlogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="35dp"
+                android:src="@drawable/iconandroidsmall"/>
+
+            <TextView
+                android:id="@+id/tvtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvaddress"
+                android:layout_alignTop="@+id/ivlogo"
+                android:text="Title"
+                android:textSize="7pt"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvaddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/ivlogo"
+                android:layout_toEndOf="@+id/ivlogo"
+                android:text="Address"
+                android:textSize="6pt"
+                android:textColor="@color/white"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
