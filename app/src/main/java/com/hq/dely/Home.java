@@ -16,6 +16,8 @@ import android.view.MenuItem;
 
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class Home extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -67,7 +69,6 @@ public class Home extends AppCompatActivity {
 
     //Adapter
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -82,6 +83,9 @@ public class Home extends AppCompatActivity {
                     List_Frag t2=new List_Frag();
                     return t2;
                 case 2:
+                    Fav_Frag t4=new Fav_Frag();
+                    return t4;
+                case 3:
                     Profile_Frag t3=new Profile_Frag();
                     return t3;
                 default:
@@ -91,7 +95,7 @@ public class Home extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -102,9 +106,13 @@ public class Home extends AppCompatActivity {
                 case 1:
                     return "LIST";
                 case 2:
-                    return "LAST";
+                    return "FAVOURITES";
+                case 3:
+                    return "PROFILE";
             }
             return null;
         }
     }
+
+
 }

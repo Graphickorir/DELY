@@ -134,7 +134,6 @@ public class company extends Fragment {
                 public void onClick(View view, int position) {
                     final String Username=getActivity().getSharedPreferences("MySharedPrefs",Context.MODE_PRIVATE).getString("Username",null);
                     final int Id_Co = getdetails.getId();
-//                    Toast.makeText(ctx,getdetails.getId()+"",Toast.LENGTH_LONG).show();
 
                     final String CO_ROOT_URL = "http://192.168.56.1/korirphp/co_id.php";
 
