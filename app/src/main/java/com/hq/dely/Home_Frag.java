@@ -139,6 +139,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
             layoutinflate = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
             View view = layoutinflate.inflate(R.layout.homevpimage,null);
             ImageView ivhomevp = (ImageView) view.findViewById(R.id.ivhomevp);
+            ivhomevp.setScaleType(ImageView.ScaleType.FIT_XY);
 
             Glide.with(getActivity())
                     .load(get.getImage())
@@ -148,11 +149,12 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                 @Override
                 public void onClick(View v) {
                     if(position != -1){
-                        Toast.makeText(getActivity(),"clicked \t"+position+"\t"+ get.getImagename() +"\t"+ get.getImage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"clicked \t"+ get.getImagename(),Toast.LENGTH_LONG).show();
                 }
             }});
 
             container.addView(view, 0);
+
             return view;
         }
 
