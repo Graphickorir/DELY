@@ -4,8 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hq.dely.Register"
-    android:background="@drawable/orangefinal">
+    tools:context="com.hq.dely.Register">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <ProgressBar
         android:id="@+id/copbar"
@@ -15,10 +19,5 @@
         android:layout_centerHorizontal="true"
         android:visibility="gone"
         android:background="@drawable/iconsized"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
 </RelativeLayout>

@@ -25,6 +25,7 @@
         <item name="android:dropDownSelector">@android:color/transparent</item>
         <item name="android:popupBackground">@color/blackshade</item>
         <item name="android:spinnerMode">dropdown</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
 </resources>

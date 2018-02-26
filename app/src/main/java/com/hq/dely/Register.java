@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     RadioGroup rggender;
     Button breg,bclear;
     ViewGroup linear;
+    ProgressBar regpbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         breg = (Button) findViewById(R.id.breg);
         linear = (ViewGroup) findViewById(R.id.lyreg);
         bclear = (Button) findViewById(R.id.bclear);
+        regpbar = (ProgressBar) findViewById(R.id.regpbar);
 
         breg.setOnClickListener(this);
         bclear.setOnClickListener(this);
@@ -134,11 +137,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         final String Gender = rb.getText().toString();
 
         final String REG_ROOT_URL = "http://192.168.56.1/korirphp/Reg.php";
+        regpbar.setVisibility(View.VISIBLE);
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, REG_ROOT_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        regpbar.setVisibility(View.INVISIBLE);
                         try {
                             JSONObject jobject = new JSONObject(response);
                             if (jobject.getString("messo") == "1") {
@@ -172,7 +177,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Register.this, "Failed to Connect", Toast.LENGTH_SHORT).show();
+                        regpbar.setVisibility(View.INVISIBLE);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(Register.this);
+                        alert.setMessage("Failed To Connect")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
                     }
                 }) {
             @Override

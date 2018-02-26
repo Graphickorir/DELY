@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hq.dely.Register"
-    android:background="@drawable/orangefinal">
+    tools:context="com.hq.dely.Register">
 
     <ProgressBar
         android:id="@+id/paypbar"
@@ -54,7 +53,7 @@
         android:layout_centerHorizontal="true"
         android:visibility="gone"
         android:text="good"
-        android:background="@color/blackhex"
+        android:background="@color/blackshade"
         android:layout_below="@+id/rgpaym"
         android:textColor="@color/white" />
 

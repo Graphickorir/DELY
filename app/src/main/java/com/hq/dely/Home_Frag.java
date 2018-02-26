@@ -1,16 +1,22 @@
 package com.hq.dely;
 
-import android.content.Context;
+
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,6 +34,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import me.relex.circleindicator.CircleIndicator;
+
 /**
  * Created by Korir on 2/16/2018.
  */
@@ -36,32 +44,39 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
     Button bt,btl;
     ViewPager vphome;
     List<getimages> imagelist;
+    CircleIndicator indicator;
+    ProgressBar vppbar;
+    TextView tvvphome;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         bt = (Button) rootView.findViewById(R.id.bthome);
         btl = (Button) rootView.findViewById(R.id.btloghome);
+        tvvphome = (TextView) rootView.findViewById(R.id.tvvphome);
         vphome = (ViewPager) rootView.findViewById(R.id.vphome);
+        indicator = (CircleIndicator) rootView.findViewById(R.id.indicator);
+        vppbar = (ProgressBar) rootView.findViewById(R.id.vppbar);
         imagelist = new ArrayList<>();
 
         loadImages();
 
+        tvvphome.setOnClickListener(this);
         bt.setOnClickListener(this);
         btl.setOnClickListener(this);
 
-//        Timer timer = new Timer();
-//        timer.scheduleAtFixedRate(new vpTimer(),2000,5000);
         return rootView;
     }
 
     private void loadImages() {
         final String CO_ROOT_URL = "http://192.168.56.1/korirphp/slider.php";
-
+        vppbar.setVisibility(View.VISIBLE);
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        vppbar.setVisibility(View.INVISIBLE);
+                        tvvphome.setVisibility(View.INVISIBLE);
                         try {
                             JSONArray json = new JSONArray(response);
                             for (int i = 0; i < json.length(); i++) {
@@ -75,6 +90,12 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                             }
                             VpAdapter vpAdapter = new VpAdapter(imagelist);
                             vphome.setAdapter(vpAdapter);
+                            indicator.setViewPager(vphome);
+
+                            Timer timer = new Timer();
+                            timer.scheduleAtFixedRate(new vpTimer(),2000,5000);
+
+                            vpAdapter.registerDataSetObserver(indicator.getDataSetObserver());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -83,23 +104,27 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        vppbar.setVisibility(View.INVISIBLE);
+                        tvvphome.setVisibility(View.VISIBLE);
                     }
                 });
         Singleton.getmInstance(getActivity()).addToRequestQueue(sRequest);
     }
 
-//    public class vpTimer extends TimerTask{
-//
-//        @Override
-//        public void run() {
-//            getActivity().runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    //loop
-//                }
-//            });
-//        }
-//    }
+
+
+    //Timer
+    public class vpTimer extends TimerTask{
+        @Override
+        public void run() {
+            vphome.post(new Runnable() {
+                @Override
+                public void run() {
+                    vphome.setCurrentItem((vphome.getCurrentItem() + 1) % imagelist.size(), false);
+                }
+            });
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -108,6 +133,8 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
         }else if(v == btl){
             Intent i = new Intent(getActivity(),Login.class);
             getActivity().startActivity(i);
+        }else if(v == tvvphome){
+            loadImages();
         }
     }
 

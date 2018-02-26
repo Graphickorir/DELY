@@ -5,23 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.hq.dely.Login"
-    android:background="@drawable/orangefinal">
-
-    <ProgressBar
-        android:id="@+id/pbar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        android:background="@drawable/iconsized"/>
+    >
 
     <ImageView
         android:id="@+id/ivlogin"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/iconandroidblack"
+        app:srcCompat="@drawable/iconandroidsmall"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         />
@@ -50,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Username"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/colorAccent" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -68,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Password"
                     android:inputType="textPassword"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/colorAccent" />
             </android.support.design.widget.TextInputLayout>
 
             <CheckBox
@@ -80,7 +71,7 @@
                 android:layout_marginTop="10dp"
                 android:checked="true"
                 android:text="Save User"
-                android:textColor="@color/white" />
+                android:textColor="@color/colorAccent" />
 
             <Button
                 android:id="@+id/blogin"
@@ -106,5 +97,14 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/pbar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:background="@drawable/iconsized"/>
 
 </RelativeLayout>

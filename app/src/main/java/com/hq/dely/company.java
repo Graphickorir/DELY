@@ -53,7 +53,6 @@ public class company extends Fragment {
         loadCompanies();
 
         return rootView;
-
     }
 
     //Volley
@@ -90,7 +89,12 @@ public class company extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                         alert.setMessage("Failed To Connect!")
-                                .setPositiveButton("Retry", null)
+                                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        loadCompanies();
+                                    }
+                                })
                                 .setCancelable(false)
                                 .create()
                                 .show();

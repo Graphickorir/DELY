@@ -4,17 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hq.dely.Register"
-    android:background="@drawable/orangefinal">
-
-    <ProgressBar
-        android:id="@+id/secpbar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        android:background="@drawable/iconsized"/>
+    tools:context="com.hq.dely.Register">
 
     <Spinner
         android:id="@+id/spinsec"
@@ -39,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Answer"
-            android:textColor="@color/white"
+            android:textColor="@color/colorAccent"
             />
 
     </android.support.design.widget.TextInputLayout>
@@ -55,6 +45,15 @@
         android:background="@color/colorAccent"
         android:text="DONE"
         android:textColor="@color/white" />
+
+    <ProgressBar
+        android:id="@+id/secpbar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:background="@drawable/iconsized"/>
 
 
 </RelativeLayout>
