@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.hq.dely.Register">
 
-    <ProgressBar
-        android:id="@+id/paypbar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        android:background="@drawable/iconsized"/>
-
     <RadioGroup
         android:id="@+id/rgpaym"
         android:layout_width="350dp"
@@ -68,5 +59,15 @@
         android:background="@color/colorAccent"
         android:text="Done"
         android:textColor="@color/white" />
+
+    <ProgressBar
+        android:id="@+id/paypbar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:background="@drawable/iconsized"/>
+
 
 </RelativeLayout>

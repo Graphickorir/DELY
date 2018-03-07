@@ -28,6 +28,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     Button blogin,btoreg;
     CheckBox cbdata;
     ProgressBar pbar;
+    final String LOGIN_ROOT_URL = "http://192.168.56.1/korirphp/Login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private void loginUser() {
         final String Username = etuser.getText().toString();
         final String Password = etpass.getText().toString();
-        final String LOGIN_ROOT_URL = "http://192.168.56.1/korirphp/Login.php";
+
         pbar.setVisibility(View.VISIBLE);
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, LOGIN_ROOT_URL,
@@ -85,8 +86,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                             JSONObject jobject = new JSONObject(response);
 
                             if(jobject.getString("messo") == "1"){
+                                int id = jobject.getInt("Id");
                                 String user = jobject.getString("Username");
-                                SharedPrefs.getmInstance(Login.this).userlogIn(user);
+                                String gender = jobject.getString("Gender");
+                                SharedPrefs.getmInstance(Login.this).userlogIn(id,user,gender);
 
                                 AlertDialog.Builder alert = new AlertDialog.Builder(Login.this);
                                 alert.setMessage("Company address not set")
@@ -94,7 +97,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Intent intent =new Intent(Login.this, Home.class);
-                                                Login.this.startActivity(intent);
+                                                startActivity(intent);
                                             }
                                         })
                                         .setPositiveButton("Set Now", new DialogInterface.OnClickListener() {
@@ -103,7 +106,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                                 Intent intent =new Intent(Login.this, SignUp.class);
                                                 intent.putExtra("Tab",0);
                                                 intent.putExtra("choice",cbdata.isChecked());
-                                                Login.this.startActivity(intent);
+                                                startActivity(intent);
+                                                finish();
+
                                             }
                                         })
                                         .setNegativeButton("Cancel", null)
@@ -112,8 +117,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         .show();
                             }
                             else if(jobject.getString("messo") == "2"){
+                                int id = jobject.getInt("Id");
                                 String user = jobject.getString("Username");
-                                SharedPrefs.getmInstance(Login.this).userlogIn(user);
+                                String gender = jobject.getString("Gender");
+                                SharedPrefs.getmInstance(Login.this).userlogIn(id,user,gender);
 
                                 AlertDialog.Builder alert = new AlertDialog.Builder(Login.this);
                                 alert.setMessage("Security Question not Answered")
@@ -121,7 +128,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Intent intent =new Intent(Login.this, Home.class);
-                                                Login.this.startActivity(intent);
+                                                startActivity(intent);
                                             }
                                         })
                                         .setPositiveButton("Answer now", new DialogInterface.OnClickListener() {
@@ -130,7 +137,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                                 Intent intent =new Intent(Login.this, SignUp.class);
                                                 intent.putExtra("Tab",1);
                                                 intent.putExtra("choice",cbdata.isChecked());
-                                                Login.this.startActivity(intent);
+                                                startActivity(intent);
+                                                finish();
                                             }
                                         })
                                         .setNegativeButton("Cancel", null)
@@ -139,8 +147,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         .show();
                             }
                             else if(jobject.getString("messo") == "3"){
+                                int id = jobject.getInt("Id");
                                 String user = jobject.getString("Username");
-                                SharedPrefs.getmInstance(Login.this).userlogIn(user);
+                                String gender = jobject.getString("Gender");
+                                SharedPrefs.getmInstance(Login.this).userlogIn(id,user,gender);
 
                                 AlertDialog.Builder alert = new AlertDialog.Builder(Login.this);
                                 alert.setMessage("Payment Method not set")
@@ -148,7 +158,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Intent intent =new Intent(Login.this, Home.class);
-                                                Login.this.startActivity(intent);
+                                                startActivity(intent);
                                             }
                                         })
                                         .setPositiveButton("Set Now", new DialogInterface.OnClickListener() {
@@ -157,7 +167,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                                 Intent intent =new Intent(Login.this, SignUp.class);
                                                 intent.putExtra("Tab",2);
                                                 intent.putExtra("choice",cbdata.isChecked());
-                                                Login.this.startActivity(intent);
+                                                startActivity(intent);
+                                                finish();
                                             }
                                         })
                                         .setNegativeButton("Cancel", null)
@@ -166,12 +177,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         .show();
                             }
                             else if (jobject.getString("messo") == "4") {
+                                int id = jobject.getInt("Id");
                                 String user = jobject.getString("Username");
-                                SharedPrefs.getmInstance(Login.this).userlogIn(user);
+                                String gender = jobject.getString("Gender");
+                                SharedPrefs.getmInstance(Login.this).userlogIn(id,user,gender);
 
                                 Intent intent =new Intent(Login.this, Home.class);
                                 intent.putExtra("choice",cbdata.isChecked());
-                                Login.this.startActivity(intent);
+                                startActivity(intent);
                                 finish();
                             }
                             else {
@@ -207,5 +220,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             }
         };
         Singleton.getmInstance(this).addToRequestQueue(sRequest);
+    }
+
+    //onbackpressed
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent =new Intent(Login.this, Home.class);
+        startActivity(intent);
+    }
+
+    //onpause
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }

@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.hq.dely.Home">
+
+    <item
+        android:id="@+id/abtext"
+        android:orderInCategory="100"
+        android:title="loged in as"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/usericon"
+        android:orderInCategory="100"
+        android:icon="@drawable/loginicon"
+        android:title="user"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/settingsicon"
+        android:orderInCategory="100"
+        android:icon="@drawable/settingsicon"
+        android:title="Settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/logouticon"
+        android:orderInCategory="100"
+        android:title="Logout"
+        app:showAsAction="never" />
+</menu>

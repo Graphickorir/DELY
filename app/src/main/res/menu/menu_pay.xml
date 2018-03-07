@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.hq.dely.SignUp">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/helppay"
+        android:icon="@drawable/helplogo"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="help"
+        app:showAsAction="always" />
+
 </menu>

@@ -1,6 +1,8 @@
 package com.hq.dely;
 
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -10,7 +12,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -30,7 +37,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,34 +49,87 @@ import me.relex.circleindicator.CircleIndicator;
  * Created by Korir on 2/16/2018.
  */
 
-public class Home_Frag extends Fragment implements View.OnClickListener{
-    Button bt,btl;
+public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar.OnMenuItemClickListener{
     ViewPager vphome;
     List<getimages> imagelist;
     CircleIndicator indicator;
     ProgressBar vppbar;
-    TextView tvvphome;
+    TextView tvvphone;
+
+    RecyclerView bestrv;
+    List<getBestDetails> bestlist;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        bt = (Button) rootView.findViewById(R.id.bthome);
-        btl = (Button) rootView.findViewById(R.id.btloghome);
-        tvvphome = (TextView) rootView.findViewById(R.id.tvvphome);
+        tvvphone = (TextView) rootView.findViewById(R.id.tvvphone);
         vphome = (ViewPager) rootView.findViewById(R.id.vphome);
         indicator = (CircleIndicator) rootView.findViewById(R.id.indicator);
         vppbar = (ProgressBar) rootView.findViewById(R.id.vppbar);
         imagelist = new ArrayList<>();
+        Toolbar toolbar= (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        toolbar.setOnMenuItemClickListener(this);
 
         loadImages();
 
-        tvvphome.setOnClickListener(this);
-        bt.setOnClickListener(this);
-        btl.setOnClickListener(this);
+        tvvphone.setOnClickListener(this);
+
+        //bestsales
+        bestlist= new ArrayList<>();
+        bestrv = (RecyclerView) rootView.findViewById(R.id.rvbest);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        bestrv.setLayoutManager(layoutManager);
+        bestrv.setHasFixedSize(true);
+        loadBest();
 
         return rootView;
     }
 
+    //menu clicked
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.usericon:
+                Intent i = new Intent(getActivity(),Login.class);
+                getActivity().startActivity(i);
+                getActivity().finish();
+                break;
+            case R.id.logouticon:
+                SharedPrefs.getmInstance(getActivity()).userlogout();
+                getActivity().recreate();
+                break;
+            case R.id.settingsicon:
+                Toast.makeText(getActivity(), "settings", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return false;
+    }
+
+    //vpTimer
+    public class vpTimer extends TimerTask{
+        @Override
+        public void run() {
+            vphome.post(new Runnable() {
+                @Override
+                public void run() {
+                    vphome.setCurrentItem((vphome.getCurrentItem() + 1) % imagelist.size(), false);
+                }
+            });
+        }
+    }
+
+    //implementing onclick
+    @Override
+    public void onClick(View v) {
+        if(v == tvvphone){
+            loadImages();
+        }
+    }
+
+    //Home automatic viewpager
+    //vpvolley
     private void loadImages() {
         final String CO_ROOT_URL = "http://192.168.56.1/korirphp/slider.php";
         vppbar.setVisibility(View.VISIBLE);
@@ -76,7 +138,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                     @Override
                     public void onResponse(String response) {
                         vppbar.setVisibility(View.INVISIBLE);
-                        tvvphome.setVisibility(View.INVISIBLE);
+                        tvvphone.setVisibility(View.INVISIBLE);
                         try {
                             JSONArray json = new JSONArray(response);
                             for (int i = 0; i < json.length(); i++) {
@@ -105,40 +167,13 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         vppbar.setVisibility(View.INVISIBLE);
-                        tvvphome.setVisibility(View.VISIBLE);
+                        tvvphone.setVisibility(View.VISIBLE);
                     }
                 });
         Singleton.getmInstance(getActivity()).addToRequestQueue(sRequest);
     }
 
-
-
-    //Timer
-    public class vpTimer extends TimerTask{
-        @Override
-        public void run() {
-            vphome.post(new Runnable() {
-                @Override
-                public void run() {
-                    vphome.setCurrentItem((vphome.getCurrentItem() + 1) % imagelist.size(), false);
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v == bt){
-            SharedPrefs.getmInstance(getActivity()).userlogout();
-        }else if(v == btl){
-            Intent i = new Intent(getActivity(),Login.class);
-            getActivity().startActivity(i);
-        }else if(v == tvvphome){
-            loadImages();
-        }
-    }
-
-    //Adapter
+    //vpAdapter
     class VpAdapter extends PagerAdapter{
 
         private LayoutInflater layoutinflate;
@@ -191,7 +226,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
         }
     }
 
-    //Getter
+    //vpGetter
     class getimages{
         String imagename,image;
 
@@ -208,4 +243,129 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
             return image;
         }
     }
+
+    //Home specials viewpager
+
+
+
+    //Home bestsales
+    //Volley
+    public void loadBest() {
+        final String CO_ROOT_URL = "http://192.168.56.1/korirphp/bestsales.php";
+//        copbar.setVisibility(View.VISIBLE);
+
+        StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        copbar.setVisibility(View.INVISIBLE);
+                        try {
+                            JSONArray json = new JSONArray(response);
+                            for (int i = 0; i < json.length(); i++) {
+                                JSONObject jsonObject = json.getJSONObject(i);
+
+                                String bestpatner = jsonObject.getString("partner");
+                                String bestimages = jsonObject.getString("best_sales");
+
+                                getBestDetails getbest = new getBestDetails(bestpatner, bestimages);
+                                bestlist.add(getbest);
+                            }
+                            rvAdapter adapter = new rvAdapter(bestlist,getActivity());
+                            bestrv.setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                });
+        Singleton.getmInstance(getActivity()).addToRequestQueue(sRequest);
+    }
+
+    //Adapter
+    class rvAdapter extends RecyclerView.Adapter<rvAdapter.rvHolder>{
+        private List<getBestDetails> bestlist;
+        Context ctx;
+
+        public rvAdapter(List<getBestDetails> bestlist, Context ctx) {
+            this.bestlist = bestlist;
+            this.ctx = ctx;
+        }
+
+
+        @Override
+        public rvHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            View itemview = inflater.inflate(R.layout.bestsalecardview,parent,false);
+
+            return new rvHolder(itemview);
+        }
+
+        @Override
+        public void onBindViewHolder(rvAdapter.rvHolder holder, int position) {
+            final getBestDetails getbest = bestlist.get(position);
+
+            Glide.with(getActivity())
+                    .load(getbest.getBestimages())
+                    .into(holder.ivbest);
+            holder.setclicker(new rvListener() {
+                @Override
+                public void onClick(View view, int position) {
+                    Toast.makeText(getActivity(), "clicked"+"\t"+getbest.getPartnername() , Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return bestlist.size();
+        }
+
+
+
+        //Holder
+        class rvHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+            ImageView ivbest;
+            rvListener click;
+
+            public rvHolder(View itemView) {
+                super(itemView);
+                ivbest = (ImageView) itemView.findViewById(R.id.ivbest);
+                ivbest.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                itemView.setOnClickListener(this);
+            }
+
+            public void setclicker(rvListener click){
+                this.click =click;
+            }
+
+            @Override
+            public void onClick(View v) {
+                click.onClick(v,getAdapterPosition());
+            }
+        }
+    }
+
+    //getitemcless
+    class getBestDetails {
+        private String bestpatner,bestimages;
+
+        public getBestDetails(String bestpatner, String bestimages) {
+            this.bestpatner = bestpatner;
+            this.bestimages= bestimages;
+        }
+
+        public String getPartnername() {
+            return bestpatner;
+        }
+
+        public String getBestimages() {
+            return bestimages;
+        }
+    }
 }
+

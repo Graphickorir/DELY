@@ -11,24 +11,29 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class Home extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-    static boolean choice;
+    static boolean choice,changeicon;
     static String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        if (SharedPrefs.getmInstance(this).UserIsLoged())
+            changeicon = true;
+        else
+            changeicon = false;
 
         name = this.getSharedPreferences("MySharedPrefs", Context.MODE_PRIVATE).getString("Username",null);
         Intent i = getIntent();
@@ -52,19 +57,15 @@ public class Home extends AppCompatActivity {
     //Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_home, menu);
+        getMenuInflater().inflate(R.menu.menu_homefrag, menu);
+
+        if(changeicon){
+
+            menu.getItem(0).setVisible(true);
+            menu.getItem(1).setIcon(R.drawable.male);
+            menu.getItem(1).setEnabled(false);}
+
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            Toast.makeText(Home.this, "Settings", Toast.LENGTH_SHORT).show();
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     //Adapter
@@ -113,6 +114,4 @@ public class Home extends AppCompatActivity {
             return null;
         }
     }
-
-
 }

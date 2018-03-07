@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,10 +37,11 @@ import java.util.Map;
  * Created by korir on 1/19/2018.
  */
 
-public class company extends Fragment {
+public class company extends Fragment implements Toolbar.OnMenuItemClickListener{
     RecyclerView recyclerView;
     List<getcompdetails> complist;
     ProgressBar copbar;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +50,9 @@ public class company extends Fragment {
         copbar= (ProgressBar) rootView.findViewById(R.id.copbar);
         complist= new ArrayList<>();
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rview);
+        Toolbar toolbar= (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        toolbar.setOnMenuItemClickListener(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
@@ -55,10 +61,23 @@ public class company extends Fragment {
         return rootView;
     }
 
+    //menu clicked
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.addcompany:
+            addCompDialogue alert = new addCompDialogue();
+            alert.setCancelable(false);
+            alert.show(getFragmentManager(),"Add Company");
+        }
+        return false;
+    }
+
     //Volley
     public void loadCompanies() {
         final String CO_ROOT_URL = "http://192.168.56.1/korirphp/delyco.php";
         copbar.setVisibility(View.VISIBLE);
+
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -133,13 +152,12 @@ public class company extends Fragment {
                     .load(getdetails.getCo_logo())
                     .into(holder.ivlogo);
 
-            holder.setclicker(new rvcompanylistener() {
+            holder.setclicker(new rvListener() {
                 @Override
                 public void onClick(View view, int position) {
+                    final String CO_ROOT_URL = "http://192.168.56.1/korirphp/co_id.php";
                     final String Username=getActivity().getSharedPreferences("MySharedPrefs",Context.MODE_PRIVATE).getString("Username",null);
                     final int Id_Co = getdetails.getId();
-
-                    final String CO_ROOT_URL = "http://192.168.56.1/korirphp/co_id.php";
 
                     copbar.setVisibility(View.VISIBLE);
                     StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
@@ -209,7 +227,7 @@ public class company extends Fragment {
         class rvHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
             TextView tvtitle, tvaddress;
             ImageView ivlogo;
-            rvcompanylistener click;
+            rvListener click;
 
             public rvHolder(View itemView) {
                 super(itemView);
@@ -220,7 +238,7 @@ public class company extends Fragment {
 
                 itemView.setOnClickListener(this);
             }
-            public void setclicker(rvcompanylistener click){
+            public void setclicker(rvListener click){
                 this.click =click;
             }
 
@@ -261,6 +279,4 @@ public class company extends Fragment {
             return co_logo;
         }
     }
-
-
 }

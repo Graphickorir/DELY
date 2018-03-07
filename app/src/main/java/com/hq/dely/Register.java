@@ -34,6 +34,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     Button breg,bclear;
     ViewGroup linear;
     ProgressBar regpbar;
+    final String REG_ROOT_URL = "http://192.168.56.1/korirphp/Reg.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +137,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         final int Phone = Integer.parseInt(etphone.getText().toString());
         final String Gender = rb.getText().toString();
 
-        final String REG_ROOT_URL = "http://192.168.56.1/korirphp/Reg.php";
         regpbar.setVisibility(View.VISIBLE);
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, REG_ROOT_URL,

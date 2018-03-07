@@ -12,7 +12,9 @@ public class SharedPrefs {
     private static Context mCtx;
 
     private static final String SHARED_PREFS ="MySharedPrefs";
+    private static final String SHARED_ID ="Id";
     private static final String SHARED_NAME ="Username";
+    private static final String SHARED_GENDER ="Gender";
 
     private SharedPrefs(Context context) {
         mCtx = context;
@@ -24,11 +26,13 @@ public class SharedPrefs {
         }
         return mInstance;
     }
-    public boolean userlogIn(String Username){
+    public boolean userlogIn(int Id,String Username,String Gender){
         SharedPreferences SharedPreferences = mCtx.getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= SharedPreferences.edit();
 
+        editor.putInt(SHARED_ID, Id);
         editor.putString(SHARED_NAME, Username);
+        editor.putString(SHARED_GENDER, Gender);
         editor.apply();
         return true;
     }

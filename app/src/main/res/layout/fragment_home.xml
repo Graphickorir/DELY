@@ -2,58 +2,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.hq.dely.Home">
 
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vphome"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_centerHorizontal="true"
-        android:background="@color/blackhex"/>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp">
 
-    <me.relex.circleindicator.CircleIndicator
-        android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/vphome"
-        android:layout_height="25dp"
-        android:background="@color/blackhex"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/bthome"
-        android:layout_width="350dp"
-        android:layout_below="@+id/indicator"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Home" />
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vphome"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/blackhex" />
 
-    <Button
-        android:id="@+id/btloghome"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bthome"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Login" />
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_below="@+id/vphome"
+                android:background="@color/blackhex" />
 
-    <ProgressBar
-        android:id="@+id/vppbar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tvspecials"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/indicator"
+                android:layout_centerHorizontal="true"
+                android:text="Weeks Specials"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:gravity="center"/>
 
-    <TextView
-        android:id="@+id/tvvphome"
-        android:layout_width="350dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="90dp"
-        android:layout_centerHorizontal="true"
-        android:text="Can't Load Images Retry!"
-        android:textAlignment="center"
-        android:visibility="gone"
-        android:textColor="@color/white"/>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpspecials"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/tvspecials"
+                android:layout_centerHorizontal="true"
+                android:background="@color/blackhex" />
 
+            <TextView
+                android:id="@+id/tvbest"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/vpspecials"
+                android:layout_centerHorizontal="true"
+                android:text="Best Sales"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvbest"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@id/tvbest"
+                android:layout_marginBottom="30dp"
+                android:orientation="horizontal"
+                android:background="@color/blackhex">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <com.pixelcan.inkpageindicator.InkPageIndicator
+                android:id="@+id/indi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvbest"
+                app:dotDiameter="8dp"
+                app:dotGap="8dp"
+                app:animationDuration="320"
+                app:pageIndicatorColor="@color/orangehex"
+                app:currentPageIndicatorColor="@color/colorAccent"/>
+
+            <TextView
+                android:id="@+id/tvvphone"
+                android:layout_width="350dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="90dp"
+                android:text="Can't Load Images Retry!"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+
+            <ProgressBar
+                android:id="@+id/vppbar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

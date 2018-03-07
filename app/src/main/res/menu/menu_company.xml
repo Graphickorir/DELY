@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.hq.dely.SignUp">
+    <item
+        android:id="@+id/searchcomp"
+        android:icon="@drawable/searchicon"
+        android:orderInCategory="100"
+        android:title="search"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/addcompany"
+        android:icon="@drawable/addcomp_logo"
+        android:orderInCategory="100"
+        android:title="Add Company"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/help"
+        android:icon="@drawable/helplogo"
+        android:orderInCategory="100"
+        android:title="help"
+        app:showAsAction="ifRoom" />
+</menu>
