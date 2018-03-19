@@ -19,9 +19,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +55,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar.OnMenuItemClickListener{
     ViewPager vphome;
     List<getimages> imagelist;
+
     CircleIndicator indicator;
     ProgressBar vppbar;
     TextView tvvphone;
@@ -59,30 +63,37 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
     RecyclerView bestrv;
     List<getBestDetails> bestlist;
 
+    GridView homgrid;
+    List<getSpecials> speclialslist;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         tvvphone = (TextView) rootView.findViewById(R.id.tvvphone);
         vphome = (ViewPager) rootView.findViewById(R.id.vphome);
         indicator = (CircleIndicator) rootView.findViewById(R.id.indicator);
-        vppbar = (ProgressBar) rootView.findViewById(R.id.vppbar);
-        imagelist = new ArrayList<>();
         Toolbar toolbar= (Toolbar) getActivity().findViewById(R.id.toolbar);
-
-        toolbar.setOnMenuItemClickListener(this);
-
-        loadImages();
-
-        tvvphone.setOnClickListener(this);
-
+        //vphome
+        imagelist = new ArrayList<>();
+        vppbar = (ProgressBar) rootView.findViewById(R.id.vppbar);
+        //specials
+        speclialslist = new ArrayList<>();
+        homgrid = (GridView) rootView.findViewById(R.id.homgrid);
+        homgrid.setFocusable(false);
         //bestsales
         bestlist= new ArrayList<>();
         bestrv = (RecyclerView) rootView.findViewById(R.id.rvbest);
 
+        toolbar.setOnMenuItemClickListener(this);
+        tvvphone.setOnClickListener(this);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         bestrv.setLayoutManager(layoutManager);
         bestrv.setHasFixedSize(true);
+        bestrv.setFocusable(false);
         loadBest();
+        getSpecialsItems();
+        loadImages();
 
         return rootView;
     }
@@ -155,7 +166,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
                             indicator.setViewPager(vphome);
 
                             Timer timer = new Timer();
-                            timer.scheduleAtFixedRate(new vpTimer(),2000,5000);
+                            timer.scheduleAtFixedRate(new vpTimer(),2000,6000);
 
                             vpAdapter.registerDataSetObserver(indicator.getDataSetObserver());
                         } catch (JSONException e) {
@@ -244,21 +255,121 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
         }
     }
 
-    //Home specials viewpager
+    //Home specials gridview
+    //volley
+    public void getSpecialsItems(){
+        final String CO_ROOT_URL = "http://192.168.56.1/korirphp/specials.php";
 
+        StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray json = new JSONArray(response);
+                            for (int i = 0; i < json.length(); i++) {
+                                JSONObject jsonObject = json.getJSONObject(i);
+
+                                String Sdesc = jsonObject.getString("desc");
+                                String Simage = jsonObject.getString("specials");
+
+                                getSpecials spec = new getSpecials(Sdesc,Simage);
+                                speclialslist.add(spec);
+                            }
+                            gvAdapter gv = new gvAdapter(speclialslist);
+                            homgrid.setAdapter(gv);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), "No Gridview images ", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Singleton.getmInstance(getActivity()).addToRequestQueue(sRequest);
+    }
+
+    //Grid view Adapter
+    class gvAdapter extends BaseAdapter{
+        LayoutInflater gridinflater;
+        private List<getSpecials> speclialslist;
+
+        public gvAdapter(List<getSpecials> speclialslist) {
+            this.speclialslist = speclialslist;
+        }
+
+        @Override
+        public int getCount() {
+            return speclialslist.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            final getSpecials get = speclialslist.get(position);
+
+            gridinflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+            View view = gridinflater.inflate(R.layout.homegridview,null);
+            ImageView ivgridview = (ImageView) view.findViewById(R.id.ivgridview);
+            TextView tvgridview = (TextView) view.findViewById(R.id.tvgridview);
+            ivgridview.setScaleType(ImageView.ScaleType.FIT_XY);
+
+            tvgridview.setText(get.getSpecialSdesc());
+            Glide.with(getActivity())
+                    .load(get.geSpecialsimages())
+                    .into(ivgridview);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(), "This is \t"+ get.getSpecialSdesc(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            return view;
+        }
+    }
+
+    //gridGetter
+    class getSpecials{
+        String Sdesc,Simage;
+
+        public getSpecials(String Sdesc,String Simage) {
+            this.Sdesc = Sdesc;
+            this.Simage = Simage;
+        }
+
+        public String getSpecialSdesc() {
+            return Sdesc;
+        }
+
+        public String geSpecialsimages() {
+            return Simage;
+        }
+    }
 
 
     //Home bestsales
     //Volley
     public void loadBest() {
         final String CO_ROOT_URL = "http://192.168.56.1/korirphp/bestsales.php";
-//        copbar.setVisibility(View.VISIBLE);
 
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-//                        copbar.setVisibility(View.INVISIBLE);
                         try {
                             JSONArray json = new JSONArray(response);
                             for (int i = 0; i < json.length(); i++) {

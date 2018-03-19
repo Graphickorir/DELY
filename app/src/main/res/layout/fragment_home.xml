@@ -40,19 +40,24 @@
                 android:textStyle="bold"
                 android:gravity="center"/>
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/vpspecials"
+            <GridView
+                android:id="@+id/homgrid"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="320dp"
                 android:layout_below="@+id/tvspecials"
-                android:layout_centerHorizontal="true"
-                android:background="@color/blackhex" />
+                android:numColumns="auto_fit"
+                android:smoothScrollbar="true"
+                android:clipChildren="true"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:padding="5dp"
+                />
 
             <TextView
                 android:id="@+id/tvbest"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_below="@+id/vpspecials"
+                android:layout_below="@+id/homgrid"
                 android:layout_centerHorizontal="true"
                 android:text="Best Sales"
                 android:textAlignment="center"
@@ -63,24 +68,12 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvbest"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="130dp"
                 android:layout_below="@id/tvbest"
                 android:layout_marginBottom="30dp"
-                android:orientation="horizontal"
-                android:background="@color/blackhex">
+                android:orientation="horizontal">
 
             </android.support.v7.widget.RecyclerView>
-
-            <com.pixelcan.inkpageindicator.InkPageIndicator
-                android:id="@+id/indi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvbest"
-                app:dotDiameter="8dp"
-                app:dotGap="8dp"
-                app:animationDuration="320"
-                app:pageIndicatorColor="@color/orangehex"
-                app:currentPageIndicatorColor="@color/colorAccent"/>
 
             <TextView
                 android:id="@+id/tvvphone"
