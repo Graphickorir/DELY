@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.hq.dely.Home">
+    tools:context="com.hq.dely.Home"
+    android:background="@color/blackhex">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -36,9 +37,10 @@
                 android:layout_centerHorizontal="true"
                 android:text="Weeks Specials"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:textStyle="bold"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:background="@color/blackhex"/>
 
             <GridView
                 android:id="@+id/homgrid"
@@ -61,9 +63,10 @@
                 android:layout_centerHorizontal="true"
                 android:text="Best Sales"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:textStyle="bold"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:background="@color/blackhex"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvbest"
@@ -71,7 +74,8 @@
                 android:layout_height="130dp"
                 android:layout_below="@id/tvbest"
                 android:layout_marginBottom="30dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
             </android.support.v7.widget.RecyclerView>
 

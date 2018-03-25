@@ -161,12 +161,12 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
                                 getimages get = new getimages(imagename,image);
                                 imagelist.add(get);
                             }
+                            Timer timer = new Timer();
+                            timer.scheduleAtFixedRate(new vpTimer(),2000,5000);
+
                             VpAdapter vpAdapter = new VpAdapter(imagelist);
                             vphome.setAdapter(vpAdapter);
                             indicator.setViewPager(vphome);
-
-                            Timer timer = new Timer();
-                            timer.scheduleAtFixedRate(new vpTimer(),2000,6000);
 
                             vpAdapter.registerDataSetObserver(indicator.getDataSetObserver());
                         } catch (JSONException e) {
@@ -381,7 +381,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
                                 getBestDetails getbest = new getBestDetails(bestpatner, bestimages);
                                 bestlist.add(getbest);
                             }
-                            rvAdapter adapter = new rvAdapter(bestlist,getActivity());
+                            homeRvAdapter adapter = new homeRvAdapter(bestlist,getActivity());
                             bestrv.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -397,11 +397,11 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
     }
 
     //Adapter
-    class rvAdapter extends RecyclerView.Adapter<rvAdapter.rvHolder>{
+    class homeRvAdapter extends RecyclerView.Adapter<homeRvAdapter.rvHolder>{
         private List<getBestDetails> bestlist;
         Context ctx;
 
-        public rvAdapter(List<getBestDetails> bestlist, Context ctx) {
+        public homeRvAdapter(List<getBestDetails> bestlist, Context ctx) {
             this.bestlist = bestlist;
             this.ctx = ctx;
         }
@@ -416,7 +416,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
         }
 
         @Override
-        public void onBindViewHolder(rvAdapter.rvHolder holder, int position) {
+        public void onBindViewHolder(homeRvAdapter.rvHolder holder, int position) {
             final getBestDetails getbest = bestlist.get(position);
 
             Glide.with(getActivity())

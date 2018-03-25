@@ -9,4 +9,5 @@
     <color name="whiteshade">#f9f9f9</color>
     <color name="orangeshade">#ff721e</color>
     <color name="orangehex">#50FF3D00</color>
+    <color name="golden">#FFD700</color>
 </resources>
