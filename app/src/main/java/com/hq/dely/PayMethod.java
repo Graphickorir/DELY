@@ -91,7 +91,7 @@ public class PayMethod extends Fragment implements View.OnClickListener{
         final int method = rbid;
         final String Username = getActivity().getSharedPreferences("MySharedPrefs", Context.MODE_PRIVATE).getString("Username",null);
 
-        final String CO_ROOT_URL = "http://192.168.56.1/korirphp/paymethod.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/paymethod.php";
 
         paypbar.setVisibility(View.VISIBLE);
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,

@@ -28,7 +28,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     Button blogin,btoreg;
     CheckBox cbdata;
     ProgressBar pbar;
-    final String LOGIN_ROOT_URL = "http://192.168.56.1/korirphp/Login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private void loginUser() {
         final String Username = etuser.getText().toString();
         final String Password = etpass.getText().toString();
-
+        String LOGIN_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/Login.php";
         pbar.setVisibility(View.VISIBLE);
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, LOGIN_ROOT_URL,

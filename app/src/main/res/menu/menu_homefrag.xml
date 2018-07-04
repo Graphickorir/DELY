@@ -17,6 +17,13 @@
         android:title="user"
         app:showAsAction="always" />
 
+    <!--<item-->
+        <!--android:id="@+id/carticon"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:icon="@drawable/cartno"-->
+        <!--android:title="user"-->
+        <!--app:showAsAction="always" />-->
+
     <item
         android:id="@+id/settingsicon"
         android:orderInCategory="100"

@@ -34,7 +34,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     Button breg,bclear;
     ViewGroup linear;
     ProgressBar regpbar;
-    final String REG_ROOT_URL = "http://192.168.56.1/korirphp/Reg.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +126,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void registerUser() {
+        String REG_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/Reg.php";
         int chosen = rggender.getCheckedRadioButtonId();
         RadioButton rb = (RadioButton) rggender.findViewById(chosen);
 

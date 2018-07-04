@@ -142,7 +142,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
     //Home automatic viewpager
     //vpvolley
     private void loadImages() {
-        final String CO_ROOT_URL = "http://192.168.56.1/korirphp/slider.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/slider.php";
         vppbar.setVisibility(View.VISIBLE);
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -258,7 +258,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
     //Home specials gridview
     //volley
     public void getSpecialsItems(){
-        final String CO_ROOT_URL = "http://192.168.56.1/korirphp/specials.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/specials.php";
 
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -364,7 +364,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
     //Home bestsales
     //Volley
     public void loadBest() {
-        final String CO_ROOT_URL = "http://192.168.56.1/korirphp/bestsales.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/bestsales.php";
 
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {

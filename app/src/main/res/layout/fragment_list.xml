@@ -6,7 +6,6 @@
         android:id="@+id/listrv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="60dp"
         android:paddingTop="5dp"
         android:paddingStart="5dp"
         android:background="@color/blackhex"/>

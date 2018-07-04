@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">DELY</string>
+    <string name="app_name">Dely</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_home">Home</string>
+    <string name="url">192.168.166.2</string>
     <string name="mpesa">
          How to pay for DELY services via M-Pesa (Safaricom)\n
         \n

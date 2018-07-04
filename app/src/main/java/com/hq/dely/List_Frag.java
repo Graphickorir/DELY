@@ -2,6 +2,7 @@ package com.hq.dely;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -13,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -51,8 +51,8 @@ public class List_Frag extends Fragment {
 
     //Volley
     public void loadCompanies() {
-        final String CO_ROOT_URL = "http://192.168.56.1/korirphp/listrv.php";
-        StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/listrv.php";
+        StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -101,7 +101,7 @@ public class List_Frag extends Fragment {
         private List<getlistdetails> listrv;
         Context ctx;
 
-        public listRvAdapter(List<getlistdetails> listrv, Context ctx) {
+        private listRvAdapter(List<getlistdetails> listrv, Context ctx) {
             this.listrv = listrv;
             this.ctx = ctx;
         }
@@ -118,6 +118,8 @@ public class List_Frag extends Fragment {
         @Override
         public void onBindViewHolder(listRvAdapter.rvHolder holder, int position) {
             final getlistdetails getdetails = listrv.get(position);
+            final int partner = getdetails.getId();
+            final String title = getdetails.getRestname();
 
             holder.tv1listrv.setText(getdetails.getRestname());
             holder.tv2listrv.setText(getdetails.getAddress());
@@ -130,7 +132,10 @@ public class List_Frag extends Fragment {
             holder.setclicker(new rvListener() {
                 @Override
                 public void onClick(View view, int position) {
-                    Toast.makeText(getActivity(), "Id is \t" +getdetails.getId(), Toast.LENGTH_SHORT).show();
+                    Intent intent =new Intent(getActivity(), Menulist.class);
+                    intent.putExtra("partner",partner+"");
+                    intent.putExtra("title", title);
+                    startActivity(intent);
                 }
             });
         }
@@ -147,7 +152,7 @@ public class List_Frag extends Fragment {
             rvListener click;
             RatingBar rblistrv;
 
-            public rvHolder(View itemView) {
+            private rvHolder(View itemView) {
                 super(itemView);
 
                 tv1listrv = (TextView) itemView.findViewById(R.id.tv1listrv);
@@ -156,10 +161,9 @@ public class List_Frag extends Fragment {
                 ivlistrv.setScaleType(ImageView.ScaleType.FIT_XY);
                 rblistrv = (RatingBar)  itemView.findViewById(R.id.rblistrv);
 
-
                 itemView.setOnClickListener(this);
             }
-            public void setclicker(rvListener click){
+            private void setclicker(rvListener click){
                 this.click =click;
             }
 
@@ -177,7 +181,7 @@ public class List_Frag extends Fragment {
         private float rating;
 
 
-        public getlistdetails(int id,String restname, String address,String rating, String restlogo) {
+        private getlistdetails(int id,String restname, String address,String rating, String restlogo) {
             this.id=id;
             this.restname = restname;
             this.address = address;

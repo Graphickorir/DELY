@@ -3,6 +3,7 @@ package com.hq.dely;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -52,6 +53,20 @@ public class Home extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 2)
+                    mViewPager.getAdapter().notifyDataSetChanged();
+            }
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+            // SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+
     }
 
     //Menu
@@ -60,11 +75,9 @@ public class Home extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_homefrag, menu);
 
         if(changeicon){
-
             menu.getItem(0).setVisible(true);
             menu.getItem(1).setIcon(R.drawable.male);
             menu.getItem(1).setEnabled(false);}
-
         return true;
     }
 
@@ -92,6 +105,11 @@ public class Home extends AppCompatActivity {
                 default:
                     return null;
             }
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return super.POSITION_NONE;
         }
 
         @Override

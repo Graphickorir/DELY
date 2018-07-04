@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Menulist"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/rvbeverages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lvbev"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/orangehex"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/btvtitle"
+                    android:layout_width="260dp"
+                    android:layout_height="39dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="start"
+                    android:padding="5dp"
+                    android:text="BEVERAGES"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btvprice"
+                    android:layout_width="100dp"
+                    android:layout_height="39dp"
+                    android:padding="5dp"
+                    android:text="PRICE"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/bevitemlv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lvbev"
+                android:divider="@color/colorPrimary"
+                android:dividerHeight="1dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rvmeals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/rvbeverages">
+
+            <LinearLayout
+                android:id="@+id/lvmeals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/orangehex"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/mtvtitle"
+                    android:layout_width="260dp"
+                    android:layout_height="39dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="start"
+                    android:padding="5dp"
+                    android:text="MEALS"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mtvprice"
+                    android:layout_width="100dp"
+                    android:layout_height="39dp"
+                    android:padding="5dp"
+                    android:text="PRICE"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/mealsitemlv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lvmeals"
+                android:divider="@color/colorPrimary"
+                android:dividerHeight="1dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rvcombo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/rvmeals">
+
+            <LinearLayout
+                android:id="@+id/lvcombo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/orangehex"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/ctvtitle"
+                    android:layout_width="260dp"
+                    android:layout_height="39dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="start"
+                    android:padding="5dp"
+                    android:text="COMBO"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/ctvprice"
+                    android:layout_width="100dp"
+                    android:layout_height="39dp"
+                    android:padding="5dp"
+                    android:text="PRICE"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/comboitemlv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lvcombo"
+                android:divider="@color/colorPrimary"
+                android:dividerHeight="1dp"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
