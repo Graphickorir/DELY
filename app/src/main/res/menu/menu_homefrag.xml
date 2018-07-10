@@ -4,25 +4,18 @@
     tools:context="com.hq.dely.Home">
 
     <item
-        android:id="@+id/abtext"
-        android:orderInCategory="100"
-        android:title="loged in as"
-        android:visible="false"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/usericon"
         android:orderInCategory="100"
         android:icon="@drawable/loginicon"
         android:title="user"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
-    <!--<item-->
-        <!--android:id="@+id/carticon"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:icon="@drawable/cartno"-->
-        <!--android:title="user"-->
-        <!--app:showAsAction="always" />-->
+    <item
+        android:id="@+id/cart_action"
+        android:orderInCategory="100"
+        android:icon="@drawable/carticon"
+        android:title="cart"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/settingsicon"

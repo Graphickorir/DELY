@@ -85,18 +85,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                             JSONObject jobject = new JSONObject(response);
 
                             if(jobject.getString("messo") == "1"){
-                                int id = jobject.getInt("Id");
                                 String user = jobject.getString("Username");
                                 String gender = jobject.getString("Gender");
-                                SharedPrefs.getmInstance(Login.this).userlogIn(id,user,gender);
+                                SharedPrefs.getmInstance(Login.this).userlogIn(user,gender);
+                                SharedPrefs.getmInstance(Login.this).userChecked(cbdata.isChecked());
 
                                 AlertDialog.Builder alert = new AlertDialog.Builder(Login.this);
                                 alert.setMessage("Company address not set")
                                         .setNeutralButton("Later", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent =new Intent(Login.this, Home.class);
-                                                startActivity(intent);
+                                                finish();
                                             }
                                         })
                                         .setPositiveButton("Set Now", new DialogInterface.OnClickListener() {
@@ -104,7 +103,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Intent intent =new Intent(Login.this, SignUp.class);
                                                 intent.putExtra("Tab",0);
-                                                intent.putExtra("choice",cbdata.isChecked());
                                                 startActivity(intent);
                                                 finish();
 
@@ -116,18 +114,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         .show();
                             }
                             else if(jobject.getString("messo") == "2"){
-                                int id = jobject.getInt("Id");
                                 String user = jobject.getString("Username");
                                 String gender = jobject.getString("Gender");
-                                SharedPrefs.getmInstance(Login.this).userlogIn(id,user,gender);
+                                SharedPrefs.getmInstance(Login.this).userlogIn(user,gender);
+                                SharedPrefs.getmInstance(Login.this).userChecked(cbdata.isChecked());
 
                                 AlertDialog.Builder alert = new AlertDialog.Builder(Login.this);
                                 alert.setMessage("Security Question not Answered")
                                         .setNeutralButton("Later", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent =new Intent(Login.this, Home.class);
-                                                startActivity(intent);
+                                                finish();
                                             }
                                         })
                                         .setPositiveButton("Answer now", new DialogInterface.OnClickListener() {
@@ -135,7 +132,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Intent intent =new Intent(Login.this, SignUp.class);
                                                 intent.putExtra("Tab",1);
-                                                intent.putExtra("choice",cbdata.isChecked());
                                                 startActivity(intent);
                                                 finish();
                                             }
@@ -146,18 +142,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         .show();
                             }
                             else if(jobject.getString("messo") == "3"){
-                                int id = jobject.getInt("Id");
                                 String user = jobject.getString("Username");
                                 String gender = jobject.getString("Gender");
-                                SharedPrefs.getmInstance(Login.this).userlogIn(id,user,gender);
+                                SharedPrefs.getmInstance(Login.this).userlogIn(user,gender);
+                                SharedPrefs.getmInstance(Login.this).userChecked(cbdata.isChecked());
 
                                 AlertDialog.Builder alert = new AlertDialog.Builder(Login.this);
                                 alert.setMessage("Payment Method not set")
                                         .setNeutralButton("Later", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent =new Intent(Login.this, Home.class);
-                                                startActivity(intent);
+                                                finish();
                                             }
                                         })
                                         .setPositiveButton("Set Now", new DialogInterface.OnClickListener() {
@@ -165,7 +160,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Intent intent =new Intent(Login.this, SignUp.class);
                                                 intent.putExtra("Tab",2);
-                                                intent.putExtra("choice",cbdata.isChecked());
                                                 startActivity(intent);
                                                 finish();
                                             }
@@ -176,14 +170,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         .show();
                             }
                             else if (jobject.getString("messo") == "4") {
-                                int id = jobject.getInt("Id");
                                 String user = jobject.getString("Username");
                                 String gender = jobject.getString("Gender");
-                                SharedPrefs.getmInstance(Login.this).userlogIn(id,user,gender);
-
-                                Intent intent =new Intent(Login.this, Home.class);
-                                intent.putExtra("choice",cbdata.isChecked());
-                                startActivity(intent);
+                                SharedPrefs.getmInstance(Login.this).userlogIn(user,gender);
+                                SharedPrefs.getmInstance(Login.this).userChecked(cbdata.isChecked());
                                 finish();
                             }
                             else {
@@ -221,18 +211,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         Singleton.getmInstance(this).addToRequestQueue(sRequest);
     }
 
-    //onbackpressed
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent =new Intent(Login.this, Home.class);
-        startActivity(intent);
-    }
-
-    //onpause
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
+//    //onbackpressed
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        Intent intent =new Intent(Login.this, Home.class);
+//        startActivity(intent);
+//    }
+//
+//    //onpause
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        finish();
+//    }
 }

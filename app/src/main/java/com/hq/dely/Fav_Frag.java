@@ -26,6 +26,7 @@ public class Fav_Frag extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (getAllFav().size() >= 1){
         View rootView = inflater.inflate(R.layout.fragment_fav, container, false);
         rvfav = (RecyclerView) rootView.findViewById(R.id.rvfav);
 
@@ -34,8 +35,13 @@ public class Fav_Frag extends Fragment {
         adapter = new favRvAdapter(getAllFav(),getActivity());
         rvfav.setAdapter(adapter);
 
-        return rootView;
+        return rootView;}
+        else{
+            View rootView = inflater.inflate(R.layout.addfav, container, false);
+            return rootView;
+        }
     }
+
     public List<getFavItems> getAllFav() {
         myDbHelper helper = new myDbHelper(getActivity());
 
@@ -110,10 +116,14 @@ public class Fav_Frag extends Fragment {
 
                     if(checkcart){
                         holder.ivfavcart.setImageResource(R.drawable.cartno);
-                        operate.removeFromCart(id);}
+                        operate.removeFromCart(id);
+                        ((addOrRemove)ctx).onRemoveProduct();
+                    }
                     else{
                         holder.ivfavcart.setImageResource(R.drawable.cartyes);
-                        operate.addCartItem(id,favitem,price, part); }
+                        operate.addCartItem(id,favitem,price, part);
+                        ((addOrRemove)ctx).onAddProduct();
+                    }
                 }
             });
             holder.ivfavitem.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +160,7 @@ public class Fav_Frag extends Fragment {
             }
         }
     }
+
     public static class getFavItems{
         private String favpart,favitem;
         private int favprice,favid;

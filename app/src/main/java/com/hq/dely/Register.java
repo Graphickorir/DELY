@@ -1,5 +1,6 @@
 package com.hq.dely;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -147,9 +148,19 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                         try {
                             JSONObject jobject = new JSONObject(response);
                             if (jobject.getString("messo") == "1") {
-                                Intent intent = new Intent(Register.this, SignUp.class);
-                                Register.this.startActivity(intent);
-                                finish();
+                                AlertDialog.Builder alert = new AlertDialog.Builder(Register.this);
+                                alert.setMessage("Registered Successfully")
+                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                SharedPrefs.getmInstance(Register.this).userlogIn(Username,Gender);
+                                                Intent intent = new Intent(Register.this, SignUp.class);
+                                                Register.this.startActivity(intent);
+                                                finish();
+                                            }
+                                        })
+                                        .create()
+                                        .show();
                             } else if (jobject.getString("messo") == "2") {
                                 AlertDialog.Builder alert = new AlertDialog.Builder(Register.this);
                                 alert.setMessage("User Already Exists")

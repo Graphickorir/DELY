@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -25,7 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Menulist extends AppCompatActivity {
+public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.OnMenuItemClickListener{
     ListView bevitemlv;
     ArrayList<getBevList> bevitems;
 
@@ -39,6 +42,8 @@ public class Menulist extends AppCompatActivity {
     public String partner;
     String title;
 
+    long count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,10 @@ public class Menulist extends AppCompatActivity {
         partner= getIntent().getStringExtra("partner");
         title = getIntent().getStringExtra("title");
         setTitle(title+"\t"+"Menu");
+
+        myDbHelper helper = new myDbHelper(this);
+        dbOperations operate = new dbOperations(helper);
+        count = operate.getProfilesCount();
 
         bevitemlv = (ListView) findViewById(R.id.bevitemlv);
         bevitems = new ArrayList<>();
@@ -60,6 +69,47 @@ public class Menulist extends AppCompatActivity {
         loadcomboitems();
 
     }
+
+    //Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_menulist, menu);
+        return true;
+    }
+
+    @Override
+    public void onAddProduct() {
+        ++count;
+        invalidateOptionsMenu();
+    }
+
+    @Override
+    public void onRemoveProduct() {
+        --count;
+        invalidateOptionsMenu();
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        MenuItem menuItem = menu.findItem(R.id.menulistcart);
+        menuItem.setIcon(Converter.convertLayoutToImage(this,count,R.drawable.carticon));
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    //menu clicked
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menulistcart:
+                break;
+        }
+        return false;
+    }
+
+
+
 
     public static class Utility {
 

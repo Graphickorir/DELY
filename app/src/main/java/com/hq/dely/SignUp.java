@@ -1,6 +1,5 @@
 package com.hq.dely;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +15,6 @@ import android.view.Menu;
 public class SignUp extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-    private static boolean checked;
     Toolbar toolbar;
 
     @Override
@@ -47,7 +45,6 @@ public class SignUp extends AppCompatActivity {
                     toolbar.inflateMenu(R.menu.menu_que);
                 }
 
-
             }
 
             @Override
@@ -62,7 +59,6 @@ public class SignUp extends AppCompatActivity {
 
         Intent i = getIntent();
         int tabis = i.getIntExtra("Tab", 0);
-        checked = i.getBooleanExtra("cbdata", true);
 
         if (tabis==0){
             TabLayout.Tab tab = tabLayout.getTabAt(0);
@@ -125,13 +121,6 @@ public class SignUp extends AppCompatActivity {
             }
             return null;
         }
-    }
-
-    //custom
-    public static void GotoHome(Context context){
-        Intent intent =new Intent(context, Home.class);
-        intent.putExtra("choice",checked);
-        context.startActivity(intent);
     }
 
     //custom

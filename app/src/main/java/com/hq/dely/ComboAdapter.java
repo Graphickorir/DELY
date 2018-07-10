@@ -76,11 +76,11 @@ public class ComboAdapter extends BaseAdapter {
                 if(checkcart){
                     ivitemcart.setImageResource(R.drawable.cartno);
                     operate.removeFromCart(getitem.getItemid());
-                    Toast.makeText(ctx, "deleted", Toast.LENGTH_SHORT).show();}
+                    ((addOrRemove)ctx).onRemoveProduct();}
                 else{
                     ivitemcart.setImageResource(R.drawable.cartyes);
                     operate.addCartItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(), title);
-                    Toast.makeText(ctx, "Added", Toast.LENGTH_SHORT).show();}
+                    ((addOrRemove)ctx).onAddProduct();}
             }
         });
 
@@ -93,12 +93,10 @@ public class ComboAdapter extends BaseAdapter {
 
                 if(checkfav) {
                     ivitemfav.setImageResource(R.drawable.favno);
-                    operate.removeFromFav(getitem.getItemid());
-                    Toast.makeText(ctx, "removed", Toast.LENGTH_SHORT).show();}
+                    operate.removeFromFav(getitem.getItemid()); }
                 else{
                     ivitemfav.setImageResource(R.drawable.favyes);
-                    operate.addFavItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(), title);
-                    Toast.makeText(ctx, "added", Toast.LENGTH_SHORT).show();}
+                    operate.addFavItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(), title); }
             }
         });
 

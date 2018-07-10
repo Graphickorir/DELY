@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/lvaddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvcomp"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:textColor="@color/colorPrimary"
+            android:padding="3dp"
+            android:text="COMPANY : "/>
+        <TextView
+            android:id="@+id/tvcartcomp"
+            android:layout_width="240dp"
+            android:layout_height="25dp"
+
+            android:padding="3dp"
+            android:layout_toRightOf="@+id/tvcomp"
+            android:text="COMPANY"/>
+        <TextView
+            android:id="@+id/tvaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:textColor="@color/colorPrimary"
+            android:padding="3dp"
+            android:layout_below="@+id/tvcartcomp"
+            android:text="ADDRESS : "/>
+        <TextView
+            android:id="@+id/tvcartaddress"
+            android:layout_width="300dp"
+            android:layout_height="25dp"
+            android:padding="3dp"
+            android:layout_below="@+id/tvcartcomp"
+            android:layout_toRightOf="@+id/tvaddress"
+            android:text="COMPANY ADDRESS"/>
+        <TextView
+            android:id="@+id/tvchangeaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:textColor="@color/colorPrimary"
+            android:padding="3dp"
+            android:layout_alignParentEnd="true"
+            android:text="Change"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_below="@+id/tvcartaddress"
+            android:background="@color/colorPrimary" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lvpay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_below="@+id/lvaddress"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tvpay"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/colorPrimary"
+            android:text="PAYMENT METHOD : "/>
+        <TextView
+            android:id="@+id/tvcartpay"
+            android:layout_width="300dp"
+            android:layout_height="25dp"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toRightOf="@+id/tvpay"
+            android:text="MPESA"/>
+        <TextView
+            android:id="@+id/tvchangepay"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:padding="3dp"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorPrimary"
+            android:text="Change"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_below="@+id/tvcartpay"
+            android:background="@color/colorPrimary" />
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/lvnotloged"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:background="@color/blackshade"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="PLEASE LOG IN FIRST"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="LOG IN" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvcart"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/lvpay"
+        android:background="@color/blackhex"/>
+
+    <RelativeLayout
+        android:id="@+id/lvtotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_below="@+id/rvcart"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:id="@+id/tvitems"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:padding="3dp"
+            android:layout_marginStart="5dp"
+            android:text="ITEMS : "
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/tvnoitems"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:padding="3dp"
+            android:text="1000"
+            android:textAlignment="center"
+            android:layout_toRightOf="@+id/tvitems" />
+        <TextView
+            android:id="@+id/tvtotalprice"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:padding="3dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:layout_toLeftOf="@+id/tvtotal"
+            android:text="TOTAL PRICE : " />
+        <TextView
+            android:id="@+id/tvtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:padding="3dp"
+            android:textAlignment="center"
+            android:layout_alignParentEnd="true"
+            android:text="100,000" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btcart"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lvtotal"
+        android:layout_centerHorizontal="true"
+        android:text="ORDER" />
+</RelativeLayout>
+</ScrollView>

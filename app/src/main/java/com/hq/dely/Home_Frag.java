@@ -2,16 +2,12 @@ package com.hq.dely;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,15 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -52,7 +45,7 @@ import me.relex.circleindicator.CircleIndicator;
  * Created by Korir on 2/16/2018.
  */
 
-public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar.OnMenuItemClickListener{
+public class Home_Frag extends Fragment implements View.OnClickListener{
     ViewPager vphome;
     List<getimages> imagelist;
 
@@ -66,13 +59,15 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
     GridView homgrid;
     List<getSpecials> speclialslist;
 
+    private static int currentPage = 0;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         tvvphone = (TextView) rootView.findViewById(R.id.tvvphone);
         vphome = (ViewPager) rootView.findViewById(R.id.vphome);
         indicator = (CircleIndicator) rootView.findViewById(R.id.indicator);
-        Toolbar toolbar= (Toolbar) getActivity().findViewById(R.id.toolbar);
+
         //vphome
         imagelist = new ArrayList<>();
         vppbar = (ProgressBar) rootView.findViewById(R.id.vppbar);
@@ -84,7 +79,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
         bestlist= new ArrayList<>();
         bestrv = (RecyclerView) rootView.findViewById(R.id.rvbest);
 
-        toolbar.setOnMenuItemClickListener(this);
+
         tvvphone.setOnClickListener(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -96,26 +91,6 @@ public class Home_Frag extends Fragment implements View.OnClickListener, Toolbar
         loadImages();
 
         return rootView;
-    }
-
-    //menu clicked
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.usericon:
-                Intent i = new Intent(getActivity(),Login.class);
-                getActivity().startActivity(i);
-                getActivity().finish();
-                break;
-            case R.id.logouticon:
-                SharedPrefs.getmInstance(getActivity()).userlogout();
-                getActivity().recreate();
-                break;
-            case R.id.settingsicon:
-                Toast.makeText(getActivity(), "settings", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return false;
     }
 
     //vpTimer

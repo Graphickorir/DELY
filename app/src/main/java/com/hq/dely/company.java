@@ -197,7 +197,7 @@ public class company extends Fragment implements Toolbar.OnMenuItemClickListener
                                 public void onErrorResponse(VolleyError error) {
                                     AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                                     alert.setMessage("Failed To Connect!")
-                                            .setPositiveButton("Retry", null)
+                                            .setPositiveButton("Retry set", null)
                                             .setCancelable(false)
                                             .create()
                                             .show();

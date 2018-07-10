@@ -9,6 +9,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,6 +37,7 @@ import java.util.List;
 public class List_Frag extends Fragment {
     RecyclerView recyclerView;
     List<getlistdetails> listrv;
+    public MenuItem menuItem;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,13 +47,13 @@ public class List_Frag extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
-        loadCompanies();
+        loadPartners();
 
         return rootView;
     }
 
     //Volley
-    public void loadCompanies() {
+    public void loadPartners() {
         final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/listrv.php";
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -85,7 +88,7 @@ public class List_Frag extends Fragment {
                                 .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        loadCompanies();
+                                        loadPartners();
                                     }
                                 })
                                 .setCancelable(false)
@@ -208,5 +211,11 @@ public class List_Frag extends Fragment {
         public String getRestlogo() {
             return restlogo;
         }
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
     }
 }

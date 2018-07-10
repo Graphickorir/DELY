@@ -26,11 +26,10 @@ public class SharedPrefs {
         }
         return mInstance;
     }
-    public boolean userlogIn(int Id,String Username,String Gender){
+    public boolean userlogIn(String Username,String Gender){
         SharedPreferences SharedPreferences = mCtx.getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= SharedPreferences.edit();
 
-        editor.putInt(SHARED_ID, Id);
         editor.putString(SHARED_NAME, Username);
         editor.putString(SHARED_GENDER, Gender);
         editor.apply();
@@ -51,5 +50,14 @@ public class SharedPrefs {
         editor.clear();
         editor.apply();
         return true;
+    }
+
+    public boolean userChecked(Boolean check){
+        SharedPreferences SharedPreferences = mCtx.getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= SharedPreferences.edit();
+
+        editor.putBoolean("Check",check);
+        editor.apply();
+        return check;
     }
 }

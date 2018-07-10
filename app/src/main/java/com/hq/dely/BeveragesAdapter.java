@@ -79,11 +79,11 @@ public class BeveragesAdapter extends BaseAdapter{
                     if(checkcart){
                         ivitemcart.setImageResource(R.drawable.cartno);
                         operate.removeFromCart(getitem.getItemid());
-                        Toast.makeText(ctx, "deleted", Toast.LENGTH_SHORT).show();}
+                        ((addOrRemove)ctx).onRemoveProduct();}
                     else{
                         ivitemcart.setImageResource(R.drawable.cartyes);
                         operate.addCartItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(), title);
-                        Toast.makeText(ctx, "Added", Toast.LENGTH_SHORT).show();}
+                        ((addOrRemove)ctx).onAddProduct();}
                 }
             });
 

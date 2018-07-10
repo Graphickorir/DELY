@@ -2,6 +2,7 @@ package com.hq.dely;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -72,22 +73,19 @@ public class dbOperations {
             return true;}//record not exist
     }
 
-    public String getData()
-    {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        String[] columns = {myDbHelper.FAV_ID,myDbHelper.FAV_ITEM,myDbHelper.FAV_PRICE,myDbHelper.FAV_PARTNER};
-        Cursor cursor =db.query(TABLE_FAV,columns,null,null,null,null,null);
-        StringBuffer buffer= new StringBuffer();
-        while (cursor.moveToNext())
-        {
-            int id =cursor.getInt(cursor.getColumnIndex(myDbHelper.FAV_ID));
-            String name =cursor.getString(cursor.getColumnIndex(myDbHelper.FAV_ITEM));
-            int price =cursor.getInt(cursor.getColumnIndex(myDbHelper.FAV_PRICE));
-            String  part =cursor.getString(cursor.getColumnIndex(myDbHelper.FAV_PARTNER));
-            buffer.append(id+ "   " + name + "   " + price +"  "+ part +"\n");
-        }
-        Log.d("items", buffer.toString());
-        return buffer.toString();
+    public long getProfilesCount() {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db, myDbHelper.TABLE_CART);
+        db.close();
+        return count;
     }
 
+    public int getcarttotal(){
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT SUM(" + helper.CART_PRICE + ") AS Total FROM " + helper.TABLE_CART, null);
+        int total = 0;
+        if (cursor.moveToFirst())
+            total = cursor.getInt(cursor.getColumnIndex("Total"));
+        return total;
+    }
 }

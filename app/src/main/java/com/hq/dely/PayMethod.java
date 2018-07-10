@@ -107,7 +107,6 @@ public class PayMethod extends Fragment implements View.OnClickListener{
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                SignUp.GotoHome(getActivity());
                                                 getActivity().finish();
                                             }
                                         })
