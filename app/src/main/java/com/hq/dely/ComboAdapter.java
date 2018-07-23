@@ -15,12 +15,14 @@ public class ComboAdapter extends BaseAdapter {
     private ArrayList<Menulist.getComboList> comboitems;
     private Context ctx;
     private String title;
+    private int partner;
     LayoutInflater inflater;
 
-    public ComboAdapter(Context ctx, ArrayList<Menulist.getComboList> comboitems,String title) {
+    public ComboAdapter(Context ctx, ArrayList<Menulist.getComboList> comboitems,String title,int partner) {
         this.ctx = ctx;
         this.comboitems = comboitems;
         this.title = title;
+        this.partner = partner;
         inflater = (LayoutInflater) ctx.getSystemService(ctx.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -79,7 +81,7 @@ public class ComboAdapter extends BaseAdapter {
                     ((addOrRemove)ctx).onRemoveProduct();}
                 else{
                     ivitemcart.setImageResource(R.drawable.cartyes);
-                    operate.addCartItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(), title);
+                    operate.addCartItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(),title);
                     ((addOrRemove)ctx).onAddProduct();}
             }
         });
@@ -96,7 +98,7 @@ public class ComboAdapter extends BaseAdapter {
                     operate.removeFromFav(getitem.getItemid()); }
                 else{
                     ivitemfav.setImageResource(R.drawable.favyes);
-                    operate.addFavItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(), title); }
+                    operate.addFavItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(),title); }
             }
         });
 

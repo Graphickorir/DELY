@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="380dp"
+    android:layout_width="match_parent"
     android:layout_height="61dp"
-    android:layout_margin="3dp">
+    android:layout_margin="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/tvfavpart"
-                android:layout_width="300dp"
+                android:layout_width="290dp"
                 android:layout_height="29dp"
                 android:layout_margin="1dp"
                 android:padding="5dp"
@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/tvfavitem"
-                android:layout_width="300dp"
+                android:layout_width="290dp"
                 android:layout_height="29dp"
                 android:layout_margin="1dp"
                 android:paddingEnd="5dp"
@@ -37,9 +37,8 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/llfav"
+            android:layout_marginTop="3dp"
+            android:layout_toLeftOf="@+id/ivfavitem"
             android:padding="4dp"/>
 
         <ImageView
@@ -49,28 +48,29 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:padding="5dp" />
 
         <TextView
             android:id="@+id/tvfavcurrecy"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="29dp"
             android:layout_alignParentBottom="true"
-            android:layout_margin="1dp"
-            android:layout_toEndOf="@+id/llfav"
+            android:layout_margin="3dp"
+            android:layout_toStartOf="@+id/tvfavprice"
             android:paddingTop="2dp"
             android:text="KSH"
             android:textAlignment="center" />
 
         <TextView
             android:id="@+id/tvfavprice"
-            android:layout_width="40dp"
-            android:layout_height="29dp"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="1dp"
-            android:paddingTop="2dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
+            android:text="1000"
             android:textAlignment="center" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

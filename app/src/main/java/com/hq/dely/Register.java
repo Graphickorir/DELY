@@ -2,7 +2,6 @@ package com.hq.dely;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Register extends AppCompatActivity implements View.OnClickListener{
-    EditText etname, etuser, etpass,etemail,etphone,etconfirm;
+    EditText etname,etlname,etuser, etpass,etemail,etphone,etconfirm;
     RadioGroup rggender;
     Button breg,bclear;
     ViewGroup linear;
@@ -42,6 +40,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_register);
 
         etname = (EditText) findViewById(R.id.etname);
+        etlname = (EditText) findViewById(R.id.etlname);
         etuser = (EditText) findViewById(R.id.etuser);
         etpass = (EditText) findViewById(R.id.etpass);
         etconfirm = (EditText) findViewById(R.id.etconfirm);
@@ -68,6 +67,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             if (etname.getText().toString().length() == 0){
                 etname.setError("Name is required!");
                 focusView = etname;
+                cancel=true;
+            }
+            else if (etlname.getText().toString().length() == 0){
+                etlname.setError("Name is required!");
+                focusView = etlname;
                 cancel=true;
             }
             else if (etuser.getText().toString().length() == 0){
@@ -105,7 +109,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                 focusView =etphone;
                 cancel=true;
             }
-            else if (phn >= 10){
+            else if (phn != 9){
                 etphone.setError("invalid Phone Number!");
                 focusView =etphone;
                 cancel=true;
@@ -131,7 +135,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         int chosen = rggender.getCheckedRadioButtonId();
         RadioButton rb = (RadioButton) rggender.findViewById(chosen);
 
-        final String Name = etname.getText().toString();
+        final String Name = etname.getText().toString() + " "+ etlname.getText().toString();
         final String Username = etuser.getText().toString();
         final String Password = etpass.getText().toString();
         final String Email = etemail.getText().toString();
@@ -229,7 +233,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    public final static boolean isValidEmail(CharSequence target) {
+    public static boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 

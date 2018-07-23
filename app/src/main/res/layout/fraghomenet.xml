@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tvnonet"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="NO CONNECTION"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"/>
+    <ImageView
+        android:id="@+id/ivnonet"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvnonet"
+        android:src="@drawable/nonet"/>
+
+    <Button
+        android:id="@+id/btnonet"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:text="RETRY"
+        android:layout_below="@+id/ivnonet"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+</RelativeLayout>

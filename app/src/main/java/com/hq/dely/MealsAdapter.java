@@ -14,13 +14,15 @@ public class MealsAdapter extends BaseAdapter {
     private ArrayList<Menulist.getMealsList> mealsitems;
     private Context ctx;
     private String title;
+    private int partner;
     public long count;
     LayoutInflater inflater;
 
-    public MealsAdapter(Context ctx, ArrayList<Menulist.getMealsList> mealsitems,String title) {
+    public MealsAdapter(Context ctx, ArrayList<Menulist.getMealsList> mealsitems,String title,int partner) {
         this.ctx = ctx;
         this.mealsitems = mealsitems;
         this.title = title;
+        this.partner = partner;
         inflater = (LayoutInflater) ctx.getSystemService(ctx.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -80,7 +82,7 @@ public class MealsAdapter extends BaseAdapter {
                 }
                 else{
                     ivitemcart.setImageResource(R.drawable.cartyes);
-                    operate.addCartItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(), title);
+                    operate.addCartItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(),title);
                     ((addOrRemove)ctx).onAddProduct();
                 }
             }
@@ -98,7 +100,7 @@ public class MealsAdapter extends BaseAdapter {
                     operate.removeFromFav(getitem.getItemid()); }
                 else{
                     ivitemfav.setImageResource(R.drawable.favyes);
-                    operate.addFavItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(), title); }
+                    operate.addFavItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(),title); }
             }
         });
 

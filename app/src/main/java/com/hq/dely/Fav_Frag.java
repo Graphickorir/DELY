@@ -22,7 +22,7 @@ import java.util.List;
 
 public class Fav_Frag extends Fragment {
     RecyclerView rvfav;
-    favRvAdapter adapter;
+    public static favRvAdapter favadapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,8 +32,8 @@ public class Fav_Frag extends Fragment {
 
         rvfav.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvfav.setHasFixedSize(true);
-        adapter = new favRvAdapter(getAllFav(),getActivity());
-        rvfav.setAdapter(adapter);
+        favadapter = new favRvAdapter(getAllFav(),getActivity());
+        rvfav.setAdapter(favadapter);
 
         return rootView;}
         else{
@@ -58,6 +58,7 @@ public class Fav_Frag extends Fragment {
                 fact.setFavitem(cursor.getString(2));
                 fact.setFavprice(cursor.getInt(3));
                 fact.setFavpart(cursor.getString(4));
+//                fact.setPartid(cursor.getInt(5));
 
                 favList.add(fact);
             } while (cursor.moveToNext());
@@ -91,6 +92,7 @@ public class Fav_Frag extends Fragment {
             final String favitem = getdetails.getFavitem();
             final int price = getdetails.getFavprice();
             final int id = getdetails.getFavid();
+            final int partid = getdetails.getPartid();
 
             holder.tvfavpart.setText(part);
             holder.tvfavitem.setText(favitem);
@@ -121,7 +123,7 @@ public class Fav_Frag extends Fragment {
                     }
                     else{
                         holder.ivfavcart.setImageResource(R.drawable.cartyes);
-                        operate.addCartItem(id,favitem,price, part);
+                        operate.addCartItem(id,favitem,price,part);
                         ((addOrRemove)ctx).onAddProduct();
                     }
                 }
@@ -133,7 +135,7 @@ public class Fav_Frag extends Fragment {
                     dbOperations operate = new dbOperations(helper);
                     operate.removeFromFav(id);
                     favlist.remove(holder.getAdapterPosition());
-                    adapter.notifyItemRemoved(holder.getAdapterPosition());
+                    favadapter.notifyItemRemoved(holder.getAdapterPosition());
                 }
             });
         }
@@ -147,7 +149,6 @@ public class Fav_Frag extends Fragment {
         class rvHolder extends RecyclerView.ViewHolder {
             TextView tvfavpart, tvfavitem, tvfavprice;
             ImageView ivfavitem,ivfavcart;
-            rvListener click;
 
             private rvHolder(View itemView) {
                 super(itemView);
@@ -163,7 +164,7 @@ public class Fav_Frag extends Fragment {
 
     public static class getFavItems{
         private String favpart,favitem;
-        private int favprice,favid;
+        private int favprice,favid,partid;
 
         public String getFavpart() {
             return favpart;
@@ -194,7 +195,28 @@ public class Fav_Frag extends Fragment {
         }
 
         private void setFavid(int favid) {
-            this.favid = favid;
+            this.favid = favid ;
+        }
+
+        public int getPartid() {
+            return partid;
+        }
+
+        private void setPartid(int partid) {
+            this.favid = partid;
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        // Refresh tab data:
+        if (getFragmentManager() != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .detach(this)
+                    .attach(this)
+                    .commit();
         }
     }
 }

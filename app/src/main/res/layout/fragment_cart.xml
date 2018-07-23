@@ -104,30 +104,24 @@
 
 
     <LinearLayout
-        android:id="@+id/lvnotloged"
-        android:layout_width="match_parent"
-        android:layout_height="210dp"
-        android:layout_centerHorizontal="true"
+    android:id="@+id/lvnotloged"
+    android:layout_width="match_parent"
+    android:layout_height="115dp"
+    android:layout_centerHorizontal="true"
+    android:padding="5dp"
+    android:background="@color/blackshade"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:padding="5dp"
-        android:background="@color/blackshade"
-        android:orientation="vertical"
-        android:visibility="gone">
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:text="PLEASE LOG IN FIRST"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textAlignment="center"/>
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="LOG IN" />
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="PLEASE LOG IN FIRST"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textAlignment="center"/>
+</LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvcart"

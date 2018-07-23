@@ -1,14 +1,12 @@
 package com.hq.dely;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,12 +14,14 @@ public class BeveragesAdapter extends BaseAdapter{
         private ArrayList<Menulist.getBevList> bevitems;
         private Context ctx;
         private String title;
+        private int partner;
         LayoutInflater inflater;
 
-        public BeveragesAdapter(Context ctx,ArrayList<Menulist.getBevList> bevitems,String title) {
+        public BeveragesAdapter(Context ctx,ArrayList<Menulist.getBevList> bevitems,String title,int partner) {
             this.ctx = ctx;
             this.bevitems = bevitems;
             this.title = title;
+            this.partner = partner;
             inflater = (LayoutInflater) ctx.getSystemService(ctx.LAYOUT_INFLATER_SERVICE);
         }
 
@@ -82,7 +82,7 @@ public class BeveragesAdapter extends BaseAdapter{
                         ((addOrRemove)ctx).onRemoveProduct();}
                     else{
                         ivitemcart.setImageResource(R.drawable.cartyes);
-                        operate.addCartItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(), title);
+                        operate.addCartItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(),title);
                         ((addOrRemove)ctx).onAddProduct();}
                 }
             });
@@ -96,12 +96,10 @@ public class BeveragesAdapter extends BaseAdapter{
 
                     if(checkfav) {
                         ivitemfav.setImageResource(R.drawable.favno);
-                        operate.removeFromFav(getitem.getItemid());
-                        Toast.makeText(ctx, "removed", Toast.LENGTH_SHORT).show();}
+                        operate.removeFromFav(getitem.getItemid()); }
                     else{
                         ivitemfav.setImageResource(R.drawable.favyes);
-                        operate.addFavItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(), title);
-                        Toast.makeText(ctx, "added"+title, Toast.LENGTH_SHORT).show();}
+                        operate.addFavItem(getitem.getItemid(),getitem.getItemname(),getitem.getItemprice(),title); }
                 }
             });
             return view;

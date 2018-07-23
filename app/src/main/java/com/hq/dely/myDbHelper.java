@@ -5,20 +5,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class myDbHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "delyAppDb";
-    public static final String TABLE_FAV = "tableFav";
-    public static final String TABLE_CART = "tableCart";
-    public static final String KEY_FAVID = "_id";
+    public static final String DATABASE_NAME = "delyAppDb";
+    public static final String TABLE_FAV = "Favtable";
+    public static final String TABLE_CART = "Carttable";
+    private static final String KEY_FAVID = "_id";
     public static final String FAV_ID = "favId";
     public static final String FAV_ITEM = "favName";
     public static final String FAV_PRICE = "favPrice";
     public static final String FAV_PARTNER = "favPart";
-    public static final String KEY_CARTID = "_id";
+//    public static final String FAV_PARTNER_ID = "favPartid";
+    private static final String KEY_CARTID = "_id";
     public static final String CART_ID = "cartId";
     public static final String CART_ITEM = "cartName";
     public static final String CART_PRICE = "cartPrice";
     public static final String CART_PARTNER = "cartPart";
-    private static final int DATABASE_Version = 1;
+//    public static final String CART_PARTNER_ID = "cartPartid";
+    private static final int DATABASE_VERSION = 2;
 
     private static final String CREATE_FAV_TABLE = "CREATE TABLE " + TABLE_FAV + "("
             + KEY_FAVID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -26,6 +28,7 @@ public class myDbHelper extends SQLiteOpenHelper {
             + FAV_ITEM + " VARCHAR(100),"
             + FAV_PRICE + " INTEGER,"
             + FAV_PARTNER + " VARCHAR(100));";
+
     private static final String CREATE_CART_TABLE = "CREATE TABLE " + TABLE_CART + "("
             + KEY_CARTID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + CART_ID + " INTEGER,"
@@ -33,8 +36,8 @@ public class myDbHelper extends SQLiteOpenHelper {
             + CART_PRICE + " INTEGER,"
             + CART_PARTNER + " VARCHAR(100));";
 
-    public myDbHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_Version);
+    myDbHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override

@@ -43,13 +43,12 @@ public class SharedPrefs {
         return false;
     }
 
-    public boolean userlogout(){
+    public void userlogout(){
         SharedPreferences SharedPreferences = mCtx.getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= SharedPreferences.edit();
-
         editor.clear();
         editor.apply();
-        return true;
+        editor.commit();
     }
 
     public boolean userChecked(Boolean check){
@@ -59,5 +58,40 @@ public class SharedPrefs {
         editor.putBoolean("Check",check);
         editor.apply();
         return check;
+    }
+
+    public void userDetails(int id,String name,String pass,String email,int phone){
+        SharedPreferences SharedPreferences = mCtx.getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= SharedPreferences.edit();
+
+        editor.putInt(SHARED_ID, id);
+        editor.putString("Name", name);
+        editor.putString("Password", pass);
+        editor.putString("Email", email);
+        editor.putInt("Phone", phone);
+        editor.apply();
+    }
+
+    public void changePass(String pass){
+        SharedPreferences SharedPreferences = mCtx.getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= SharedPreferences.edit();
+        editor.putString("Password", pass);
+        editor.apply();
+    }
+
+    public void changeEmail(String email){
+        SharedPreferences SharedPreferences = mCtx.getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= SharedPreferences.edit();
+
+        editor.putString("Email", email);
+        editor.apply();
+    }
+
+    public void changePhone(int phone){
+        SharedPreferences SharedPreferences = mCtx.getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= SharedPreferences.edit();
+
+        editor.putInt("Phone", phone);
+        editor.apply();
     }
 }

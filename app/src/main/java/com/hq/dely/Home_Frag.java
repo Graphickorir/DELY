@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -60,9 +61,11 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
     List<getSpecials> speclialslist;
 
     private static int currentPage = 0;
+    boolean net = true;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (net){
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         tvvphone = (TextView) rootView.findViewById(R.id.tvvphone);
         vphome = (ViewPager) rootView.findViewById(R.id.vphome);
@@ -90,21 +93,33 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
         getSpecialsItems();
         loadImages();
 
-        return rootView;
-    }
+        return rootView;}
+        else {
+            View rootView = inflater.inflate(R.layout.fraghomenet, container, false);
+            Button btnonet = (Button) rootView.findViewById(R.id.btnonet);
 
-    //vpTimer
-    public class vpTimer extends TimerTask{
-        @Override
-        public void run() {
-            vphome.post(new Runnable() {
+            btnonet.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void run() {
-                    vphome.setCurrentItem((vphome.getCurrentItem() + 1) % imagelist.size(), false);
+                public void onClick(View view) {
+                    getActivity().recreate();
                 }
             });
+            return rootView;
         }
     }
+
+//    //vpTimer
+//    public class vpTimer extends TimerTask{
+//        @Override
+//        public void run() {
+//            vphome.post(new Runnable() {
+//                @Override
+//                public void run() {
+//                    vphome.setCurrentItem((vphome.getCurrentItem() + 1) % imagelist.size(), false);
+//                }
+//            });
+//        }
+//    }
 
     //implementing onclick
     @Override
@@ -136,8 +151,8 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                                 getimages get = new getimages(imagename,image);
                                 imagelist.add(get);
                             }
-                            Timer timer = new Timer();
-                            timer.scheduleAtFixedRate(new vpTimer(),2000,5000);
+//                            Timer timer = new Timer();
+//                            timer.scheduleAtFixedRate(new vpTimer(),2000,5000);
 
                             VpAdapter vpAdapter = new VpAdapter(imagelist);
                             vphome.setAdapter(vpAdapter);

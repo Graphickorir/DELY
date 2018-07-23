@@ -39,7 +39,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
     ListView comboitemlv;
     ArrayList<getComboList> comboitems;
 
-    public String partner;
+    public int partner;
     String title;
 
     long count;
@@ -48,9 +48,9 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menulist);
-        partner= getIntent().getStringExtra("partner");
+        partner= getIntent().getIntExtra("partner",0);
         title = getIntent().getStringExtra("title");
-        setTitle(title+"\t"+"Menu");
+        setTitle(title+" "+"Menu");
 
         myDbHelper helper = new myDbHelper(this);
         dbOperations operate = new dbOperations(helper);
@@ -155,7 +155,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
                                 bevitems.add(getitems);
                             }
 
-                            BeveragesAdapter adapter = new BeveragesAdapter(Menulist.this,bevitems,title);
+                            BeveragesAdapter adapter = new BeveragesAdapter(Menulist.this,bevitems,title,partner);
                             bevitemlv.setAdapter(adapter);
                             Utility.setListViewHeightBasedOnChildren(bevitemlv);
                             ((BaseAdapter) bevitemlv.getAdapter()).notifyDataSetChanged();
@@ -185,7 +185,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("Partner", partner);
+                params.put("Partner", partner+"");
                 params.put("Item_cat",cat+"");
                 return params;
             }
@@ -238,7 +238,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
                                 mealsitems.add(getitems);
                             }
 
-                            MealsAdapter adapter = new MealsAdapter(Menulist.this,mealsitems,title);
+                            MealsAdapter adapter = new MealsAdapter(Menulist.this,mealsitems,title,partner);
                             mealsitemlv.setAdapter(adapter);
                             Utility.setListViewHeightBasedOnChildren(mealsitemlv);
 
@@ -320,7 +320,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
                                 comboitems.add(getitems);
                             }
 
-                            ComboAdapter adapter = new ComboAdapter(Menulist.this,comboitems,title);
+                            ComboAdapter adapter = new ComboAdapter(Menulist.this,comboitems,title,partner);
                             comboitemlv.setAdapter(adapter);
                             Utility.setListViewHeightBasedOnChildren(comboitemlv);
 

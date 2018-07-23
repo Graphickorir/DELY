@@ -56,13 +56,9 @@ public class Home extends AppCompatActivity implements addOrRemove, Toolbar.OnMe
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if (position == 2) {
-                    mViewPager.getAdapter().notifyDataSetChanged();
+                if (position == 1) {
+                    onAddProduct();
                     setIcons();}
-                else if (position == 3){
-                    mViewPager.getAdapter().notifyDataSetChanged();
-                    setIcons();
-                }
             }
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
@@ -92,13 +88,17 @@ public class Home extends AppCompatActivity implements addOrRemove, Toolbar.OnMe
 
     @Override
     public void onAddProduct() {
-        ++count;
+        myDbHelper helper = new myDbHelper(this);
+        dbOperations operate = new dbOperations(helper);
+        count = operate.getProfilesCount();
         invalidateOptionsMenu();
     }
 
     @Override
     public void onRemoveProduct() {
-        --count;
+        myDbHelper helper = new myDbHelper(this);
+        dbOperations operate = new dbOperations(helper);
+        count = operate.getProfilesCount();
         invalidateOptionsMenu();
     }
 
@@ -132,6 +132,9 @@ public class Home extends AppCompatActivity implements addOrRemove, Toolbar.OnMe
                 this.startActivity(i);
                 break;
             case R.id.cart_action:
+                invalidateOptionsMenu();
+                TabLayout.Tab tab = tabLayout.getTabAt(3);
+                tab.select();
                 break;
             case R.id.logouticon:
                 SharedPrefs.getmInstance(this).userlogout();
@@ -186,9 +189,9 @@ public class Home extends AppCompatActivity implements addOrRemove, Toolbar.OnMe
     }
 
     @Override
-    protected void onPostResume() {
-        invalidateOptionsMenu();
-        super.onPostResume();
+    protected void onResume() {
+        onAddProduct();
+        super.onResume();
     }
 }
 

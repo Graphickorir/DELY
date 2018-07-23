@@ -4,17 +4,13 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.hq.dely.myDbHelper.TABLE_FAV;
 
 public class dbOperations {
-    myDbHelper helper;
+    private myDbHelper helper;
 
-    public dbOperations(myDbHelper helper) {
+    dbOperations(myDbHelper helper) {
         this.helper = helper;
     }
 
