@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dp">
+    <TextView
+        android:id="@+id/transpart"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="Java House"
+        android:textSize="16sp"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/colorPrimary"/>
+    <ImageView
+        android:id="@+id/ivtrans"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/redcircle"
+        android:padding="2dp"/>
+    <TextView
+        android:id="@+id/transdely"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="Delivered; "
+        android:textSize="16sp"
+        android:layout_marginStart="5dp"
+        android:layout_toStartOf="@+id/ivtrans"/>
+    <TextView
+        android:id="@+id/transitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/transpart"
+        android:text="zinger"
+        android:textSize="15sp"
+        android:layout_marginStart="5dp"/>
+
+</RelativeLayout>

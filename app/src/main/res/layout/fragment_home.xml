@@ -39,7 +39,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:background="@color/blackhex"/>
+                android:background="@color/colorPrimary"/>
 
             <GridView
                 android:id="@+id/homgrid"
@@ -65,12 +65,12 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:background="@color/blackhex"/>
+                android:background="@color/colorPrimary"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvbest"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/tvbest"
                 android:orientation="horizontal"
                 android:layout_marginBottom="60dp">

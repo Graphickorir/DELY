@@ -176,10 +176,14 @@
 
     <Button
         android:id="@+id/btcart"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lvtotal"
+        android:layout_height="30dp"
         android:layout_centerHorizontal="true"
-        android:text="ORDER" />
+        android:layout_below="@+id/lvtotal"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorAccent"
+        android:text="Order"
+        android:textColor="@color/white" />
 </RelativeLayout>
 </ScrollView>

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -43,12 +44,14 @@ public class SecQue extends Fragment implements AdapterView.OnItemSelectedListen
 
     ArrayAdapter arrayAdapter;
     List<String> listData=new ArrayList<>();
+    Boolean choosen ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.secque, container, false);
 
+        listData.add("Choose security question ");
         listData.add("What was your first pets name ");
         listData.add("What is your mother's middle name");
         listData.add("What is your favourite meal");
@@ -65,6 +68,8 @@ public class SecQue extends Fragment implements AdapterView.OnItemSelectedListen
         spinsec.setOnItemSelectedListener(this);
 
         btsec.setOnClickListener(this);
+
+
 
         return rootView;
     }
@@ -83,14 +88,22 @@ public class SecQue extends Fragment implements AdapterView.OnItemSelectedListen
 
             if(cancel)
                 focusView.requestFocus();
-            else
-                SetSecque();}
+            else if (choosen){
+                SetSecque();
+            }else
+                Toast.makeText(getActivity(), "Choose question ", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position,long id) {
-        que = position;
+        if (position == 0)
+            choosen = false;
+        else{
+            choosen = true;
+            que = position;
+        }
     }
 
     @Override
@@ -99,7 +112,7 @@ public class SecQue extends Fragment implements AdapterView.OnItemSelectedListen
 
 
     public void SetSecque(){
-        final int secque=(que+1);
+        final int secque=(que);
         final String secans = etsec.getText().toString();
         final String Username = getActivity().getSharedPreferences("MySharedPrefs", Context.MODE_PRIVATE).getString("Username",null);
 

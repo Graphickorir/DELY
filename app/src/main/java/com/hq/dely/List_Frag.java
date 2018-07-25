@@ -148,7 +148,7 @@ public class List_Frag extends Fragment {
                     custombuilder.setView(dialogView);
                     custombuilder.setCancelable(true);
                     ImageView alertiv = (ImageView) dialogView.findViewById(R.id.alertiv);
-                    Button alertbt = (Button) dialogView.findViewById(R.id.alertbt);
+//                    Button alertbt = (Button) dialogView.findViewById(R.id.alertbt);
                     final RatingBar alertrb = (RatingBar) dialogView.findViewById(R.id.alertrb);
                     final TextView alerttv = (TextView) dialogView.findViewById(R.id.alerttv);
                     Glide.with(getActivity())
@@ -156,11 +156,9 @@ public class List_Frag extends Fragment {
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(alertiv);
                     alerttv.setText("Rate "+title);
-                    customalert = custombuilder.create();
-                    customalert.show();
-                    alertbt.setOnClickListener(new View.OnClickListener() {
+                    custombuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(View view) {
+                        public void onClick(DialogInterface dialogInterface, int i) {
                             boolean check = SharedPrefs.getmInstance(getActivity()).UserIsLoged();
                             Float rating = alertrb.getRating();
                             if(check){
@@ -173,6 +171,8 @@ public class List_Frag extends Fragment {
                             }
                         }
                     });
+                    customalert = custombuilder.create();
+                    customalert.show();
                 }
             });
             holder.setclicker(new rvListener() {

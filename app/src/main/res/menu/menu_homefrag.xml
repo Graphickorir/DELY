@@ -16,17 +16,4 @@
         android:icon="@drawable/carticon"
         android:title="cart"
         app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/settingsicon"
-        android:orderInCategory="100"
-        android:icon="@drawable/settingsicon"
-        android:title="Settings"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/logouticon"
-        android:orderInCategory="100"
-        android:title="Logout"
-        app:showAsAction="never" />
 </menu>

@@ -138,7 +138,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                             intent.putExtra("Email",email);
                                             startActivity(intent);
                                         }else{
-                                            Toast.makeText(Login.this, "Wrong answer ! \nCheck spelling and capitalization", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Login.this, "Wrong answer ! \nCheck spelling and capitalization", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });

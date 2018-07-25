@@ -367,7 +367,12 @@ public class Profile_Frag extends Fragment implements View.OnClickListener{
             Toast.makeText(getActivity(), "previously", Toast.LENGTH_SHORT).show();
         }
         else if (view == contact){
-            Toast.makeText(getActivity(), "contact", Toast.LENGTH_SHORT).show();
+            String[] to = {"delycustomercare.co.ke"};
+            Intent emailintent = new Intent(Intent.ACTION_SEND);
+            emailintent.setType("text/plain");
+            emailintent.putExtra(Intent.EXTRA_EMAIL, to);
+            emailintent.putExtra(Intent.EXTRA_SUBJECT, "Report Bug");
+            startActivity(emailintent);
         }
     }
 

@@ -259,10 +259,13 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                             for (int i = 0; i < json.length(); i++) {
                                 JSONObject jsonObject = json.getJSONObject(i);
 
+                                int itemId = jsonObject.getInt("itemId");
+                                String itemName = jsonObject.getString("itemName");
+                                int itemPrice = jsonObject.getInt("itemPrice");
                                 String Sdesc = jsonObject.getString("desc");
                                 String Simage = jsonObject.getString("specials");
 
-                                getSpecials spec = new getSpecials(Sdesc,Simage);
+                                getSpecials spec = new getSpecials(itemId,itemName,itemPrice,Sdesc,Simage);
                                 speclialslist.add(spec);
                             }
                             gvAdapter gv = new gvAdapter(speclialslist);
@@ -316,7 +319,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
             TextView tvgridview = (TextView) view.findViewById(R.id.tvgridview);
             ivgridview.setScaleType(ImageView.ScaleType.FIT_XY);
 
-            tvgridview.setText(get.getSpecialSdesc());
+            tvgridview.setText("KSH "+get.getItemPrice());
             Glide.with(getActivity())
                     .load(get.geSpecialsimages())
                     .into(ivgridview);
@@ -324,7 +327,21 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "This is \t"+ get.getSpecialSdesc(), Toast.LENGTH_SHORT).show();
+
+                    myDbHelper helper = new myDbHelper(getActivity());
+                    dbOperations operate = new dbOperations(helper);
+                    boolean checkcart = operate.checkCart(get.getItemId());
+
+                    if(checkcart){
+                        operate.removeFromCart(get.getItemId());
+                        ((addOrRemove)getActivity()).onRemoveProduct();
+                        Toast.makeText(getActivity(), get.getItemName()+" removed to cart", Toast.LENGTH_SHORT).show();}
+                    else{
+                        operate.addCartItem(get.getItemId(),get.getItemName(),get.getItemPrice(),get.getSpecialSdesc());
+                        ((addOrRemove)getActivity()).onAddProduct();
+                        Toast.makeText(getActivity(), get.getItemName()+" added to cart", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             });
 
@@ -334,11 +351,27 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
 
     //gridGetter
     class getSpecials{
-        String Sdesc,Simage;
+        String Sdesc,Simage,itemName;
+        int itemId,itemPrice;
 
-        public getSpecials(String Sdesc,String Simage) {
+        public getSpecials(int itemId,String itemName,int itemPrice,String Sdesc,String Simage) {
+            this.itemId= itemId;
+            this.itemName = itemName;
+            this.itemPrice = itemPrice;
             this.Sdesc = Sdesc;
             this.Simage = Simage;
+        }
+
+        public String getItemName() {
+            return itemName;
+        }
+
+        public int getItemId() {
+            return itemId;
+        }
+
+        public int getItemPrice() {
+            return itemPrice;
         }
 
         public String getSpecialSdesc() {
@@ -365,10 +398,13 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                             for (int i = 0; i < json.length(); i++) {
                                 JSONObject jsonObject = json.getJSONObject(i);
 
+                                int itemId = jsonObject.getInt("itemId");
+                                String itemName = jsonObject.getString("itemName");
+                                int itemPrice = jsonObject.getInt("itemPrice");
                                 String bestpatner = jsonObject.getString("partner");
                                 String bestimages = jsonObject.getString("best_sales");
 
-                                getBestDetails getbest = new getBestDetails(bestpatner, bestimages);
+                                getBestDetails getbest = new getBestDetails(itemId,itemName,itemPrice,bestpatner, bestimages);
                                 bestlist.add(getbest);
                             }
                             homeRvAdapter adapter = new homeRvAdapter(bestlist,getActivity());
@@ -408,14 +444,29 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
         @Override
         public void onBindViewHolder(homeRvAdapter.rvHolder holder, int position) {
             final getBestDetails getbest = bestlist.get(position);
-
+            holder.besttv.setText("KSH "+getbest.getItemPrice());
             Glide.with(getActivity())
                     .load(getbest.getBestimages())
                     .into(holder.ivbest);
             holder.setclicker(new rvListener() {
                 @Override
                 public void onClick(View view, int position) {
-                    Toast.makeText(getActivity(), "clicked"+"\t"+getbest.getPartnername() , Toast.LENGTH_SHORT).show();
+                    myDbHelper helper = new myDbHelper(getActivity());
+                    dbOperations operate = new dbOperations(helper);
+                    boolean checkcart = operate.checkCart(getbest.getItemId());
+
+                    if(checkcart){
+//                        ivitemcart.setImageResource(R.drawable.cartno);
+                        operate.removeFromCart(getbest.getItemId());
+                        ((addOrRemove)getActivity()).onRemoveProduct();
+                        Toast.makeText(getActivity(), getbest.getItemName()+" removed to cart", Toast.LENGTH_SHORT).show();}
+                    else{
+//                        ivitemcart.setImageResource(R.drawable.cartyes);
+                        operate.addCartItem(getbest.getItemId(),getbest.getItemName(),getbest.getItemPrice(),getbest.getPartnername());
+                        ((addOrRemove)getActivity()).onAddProduct();
+                        Toast.makeText(getActivity(), getbest.getItemName()+" added to cart", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             });
         }
@@ -430,17 +481,19 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
         //Holder
         class rvHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
             ImageView ivbest;
+            TextView besttv;
             rvListener click;
 
-            public rvHolder(View itemView) {
+            rvHolder(View itemView) {
                 super(itemView);
                 ivbest = (ImageView) itemView.findViewById(R.id.ivbest);
+                besttv = (TextView) itemView.findViewById(R.id.besttv);
                 ivbest.setScaleType(ImageView.ScaleType.FIT_XY);
 
                 itemView.setOnClickListener(this);
             }
 
-            public void setclicker(rvListener click){
+            void setclicker(rvListener click){
                 this.click =click;
             }
 
@@ -453,13 +506,28 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
 
     //getitemcless
     class getBestDetails {
-        private String bestpatner,bestimages;
+        private String bestpatner,bestimages,itemName;
+        int itemId,itemPrice;
 
-        public getBestDetails(String bestpatner, String bestimages) {
+        public getBestDetails(int itemId,String itemName,int itemPrice,String bestpatner, String bestimages) {
+            this.itemId= itemId;
+            this.itemName = itemName;
+            this.itemPrice = itemPrice;
             this.bestpatner = bestpatner;
             this.bestimages= bestimages;
         }
 
+        public String getItemName() {
+            return itemName;
+        }
+
+        public int getItemId() {
+            return itemId;
+        }
+
+        public int getItemPrice() {
+            return itemPrice;
+        }
         public String getPartnername() {
             return bestpatner;
         }

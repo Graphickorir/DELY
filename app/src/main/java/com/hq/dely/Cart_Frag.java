@@ -48,6 +48,7 @@ public class Cart_Frag extends Fragment {
     Button btcart;
 
     int userId;
+    int total;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,7 +80,8 @@ public class Cart_Frag extends Fragment {
 
             myDbHelper helper = new myDbHelper(getActivity());
             final dbOperations operations = new dbOperations(helper);
-            tvtotal.setText("KSH "+operations.getcarttotal());
+            total = operations.getcarttotal();
+            tvtotal.setText("KSH "+total);
 
             TextView tvnoitems = (TextView) rootView.findViewById(R.id.tvnoitems);
             tvnoitems.setText("" + getAllCart().size());
@@ -110,7 +112,8 @@ public class Cart_Frag extends Fragment {
                     }else{
                         if(isloged){
                             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                            alert.setMessage("Make Orders?"+"\n"+"Total Cost: "+operations.getcarttotal())
+                            alert.setTitle("Confirm")
+                                    .setMessage("Make Orders?"+"\n"+"Total Cost: "+operations.getcarttotal())
                                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -148,7 +151,8 @@ public class Cart_Frag extends Fragment {
                             JSONObject jobject = new JSONObject(response);
                             if((jobject.getString("messo")) == "1" ){
                                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                                alert.setMessage("Orders Placed Delivery in 30mins")
+                                alert.setTitle("Success")
+                                        .setMessage("Orders Placed Delivery in 30mins")
                                         .setPositiveButton("Ok", null)
                                         .setCancelable(true)
                                         .create()
@@ -187,6 +191,7 @@ public class Cart_Frag extends Fragment {
                         suborder.put("User",userId+"");
                         suborder.put("Part",getdetails.cartpart);
                         suborder.put("Item",getdetails.cartid+"");
+                        suborder.put("Total",total+"");
                         orders.put(suborder);
                     } catch (JSONException e) {
                         e.printStackTrace();
