@@ -113,7 +113,7 @@ public class Cart_Frag extends Fragment {
                         if(isloged){
                             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                             alert.setTitle("Confirm")
-                                    .setMessage("Make Orders?"+"\n"+"Total Cost: "+operations.getcarttotal())
+                                    .setMessage("Make Orders?"+"\n"+"Total Cost: KSH "+operations.getcarttotal())
                                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -149,10 +149,18 @@ public class Cart_Frag extends Fragment {
                     public void onResponse(String response) {
                         try {
                             JSONObject jobject = new JSONObject(response);
-                            if((jobject.getString("messo")) == "1" ){
+                            if(jobject.getString("messo").equals("1")){
                                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                                 alert.setTitle("Success")
                                         .setMessage("Orders Placed Delivery in 30mins")
+                                        .setPositiveButton("Ok", null)
+                                        .setCancelable(true)
+                                        .create()
+                                        .show();
+                            }else if (jobject.getString("messo").equals("0")){
+                                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                                alert.setTitle("Low Balance")
+                                        .setMessage("Orders can't be placed \nPlease deposit funds into your account")
                                         .setPositiveButton("Ok", null)
                                         .setCancelable(true)
                                         .create()
