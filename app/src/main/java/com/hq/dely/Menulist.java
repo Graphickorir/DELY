@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -29,6 +30,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.OnMenuItemClickListener{
+    LinearLayout lvbev,lvmeals,lvcombo;
+
     ListView bevitemlv;
     ArrayList<getBevList> bevitems;
 
@@ -51,6 +54,10 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
         partner= getIntent().getIntExtra("partner",0);
         title = getIntent().getStringExtra("title");
         setTitle(title+" "+"Menu");
+
+        lvbev = (LinearLayout) findViewById(R.id.lvbev);
+        lvmeals = (LinearLayout) findViewById(R.id.lvmeals);
+        lvcombo = (LinearLayout) findViewById(R.id.lvcombo);
 
         myDbHelper helper = new myDbHelper(this);
         dbOperations operate = new dbOperations(helper);
@@ -143,6 +150,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
                     @Override
                     public void onResponse(String response) {
                         try {
+                            lvbev.setVisibility(View.VISIBLE);
                             JSONArray json = new JSONArray(response);
                             for (int i = 0; i < json.length(); i++) {
                                 JSONObject jsonObject = json.getJSONObject(i);
@@ -226,6 +234,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
                     @Override
                     public void onResponse(String response) {
                         try {
+                            lvmeals.setVisibility(View.VISIBLE);
                             JSONArray json = new JSONArray(response);
                             for (int i = 0; i < json.length(); i++) {
                                 JSONObject jsonObject = json.getJSONObject(i);
@@ -308,6 +317,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
                     @Override
                     public void onResponse(String response) {
                         try {
+                            lvcombo.setVisibility(View.VISIBLE);
                             JSONArray json = new JSONArray(response);
                             for (int i = 0; i < json.length(); i++) {
                                 JSONObject jsonObject = json.getJSONObject(i);

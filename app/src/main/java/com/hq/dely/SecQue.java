@@ -69,8 +69,6 @@ public class SecQue extends Fragment implements AdapterView.OnItemSelectedListen
 
         btsec.setOnClickListener(this);
 
-
-
         return rootView;
     }
 
@@ -172,8 +170,6 @@ public class SecQue extends Fragment implements AdapterView.OnItemSelectedListen
                 return params;
             }
         };
-
         Singleton.getmInstance(getActivity()).addToRequestQueue(sRequest);
-
     }
 }

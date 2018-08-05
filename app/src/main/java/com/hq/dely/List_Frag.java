@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -145,8 +146,9 @@ public class List_Frag extends Fragment {
                     custombuilder = new AlertDialog.Builder(getActivity());
                     LayoutInflater inflater = getActivity().getLayoutInflater();
                     View dialogView = inflater.inflate(R.layout.custom_alertlist_frag, null);
-                    custombuilder.setView(dialogView);
-                    custombuilder.setCancelable(true);
+                    custombuilder.setTitle("Rate"+title)
+                            .setView(dialogView)
+                            .setCancelable(true);
                     ImageView alertiv = (ImageView) dialogView.findViewById(R.id.alertiv);
 //                    Button alertbt = (Button) dialogView.findViewById(R.id.alertbt);
                     final RatingBar alertrb = (RatingBar) dialogView.findViewById(R.id.alertrb);
@@ -205,7 +207,7 @@ public class List_Frag extends Fragment {
                 tv1listrv = (TextView) itemView.findViewById(R.id.tv1listrv);
                 tv2listrv = (TextView) itemView.findViewById(R.id.tv2listrv);
                 ivlistrv = (ImageView) itemView.findViewById(R.id.ivlistrv);
-                ivlistrv.setScaleType(ImageView.ScaleType.FIT_XY);
+//                ivlistrv.setScaleType(ImageView.ScaleType.FIT_XY);
                 rblistrv = (RatingBar)  itemView.findViewById(R.id.rblistrv);
 
                 itemView.setOnClickListener(this);
@@ -290,7 +292,7 @@ public class List_Frag extends Fragment {
                 params.put("userid", userid+"");
                 return params;
             }
-        };;
+        };
         Singleton.getmInstance(getActivity()).addToRequestQueue(sRequest);
     }
 }

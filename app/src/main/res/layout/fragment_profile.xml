@@ -24,7 +24,7 @@
                 android:id="@+id/protvuser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="USER NAME : "
+                android:text="NAME : "
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:textColor="@color/white"

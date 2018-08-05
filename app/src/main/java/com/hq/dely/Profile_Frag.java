@@ -364,7 +364,11 @@ public class Profile_Frag extends Fragment implements View.OnClickListener{
                 changePass();
         }
         else if (view == previously){
-            Toast.makeText(getActivity(), "previously", Toast.LENGTH_SHORT).show();
+            if(SharedPrefs.getmInstance(getActivity()).UserIsLoged()){
+            Intent i =new Intent(getActivity(),Trans.class);
+            startActivity(i);
+            }else
+                Toast.makeText(getActivity(), "Please Login First", Toast.LENGTH_SHORT).show();
         }
         else if (view == contact){
             String[] to = {"delycustomercare.co.ke"};

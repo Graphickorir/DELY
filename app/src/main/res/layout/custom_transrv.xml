@@ -62,11 +62,20 @@
             android:layout_margin="3dp"
             android:padding="3dp">
             <TextView
-                android:id="@+id/tvtransamt"
+                android:id="@+id/tvtype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="AMOUNT"
+                android:text="TYPE: "
+                android:textStyle="bold"
+                android:padding="2dp"/>
+            <TextView
+                android:id="@+id/transtype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tvtype"
+                android:layout_gravity="end"
+                android:text="order"
                 android:textStyle="bold"
                 android:padding="2dp"/>
             <TextView
@@ -78,8 +87,19 @@
                 android:text="KSH 1000"
                 android:textStyle="bold"
                 android:padding="2dp"/>
+            <TextView
+                android:id="@+id/tvtransamt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/tvtrans"
+                android:text="AMOUNT: "
+                android:textStyle="bold"
+                android:padding="2dp"/>
         </RelativeLayout>
-
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="@color/colorPrimary" />
         <Spinner
             android:id="@+id/transspinner"
             android:layout_width="match_parent"

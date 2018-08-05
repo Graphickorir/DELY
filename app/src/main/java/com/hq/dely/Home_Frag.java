@@ -145,10 +145,11 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                             for (int i = 0; i < json.length(); i++) {
                                 JSONObject jsonObject = json.getJSONObject(i);
 
-                                String imagename = jsonObject.getString("imagename");
+                                int partid = jsonObject.getInt("partid");
+                                String part = jsonObject.getString("part");
                                 String image = jsonObject.getString("images");
 
-                                getimages get = new getimages(imagename,image);
+                                getimages get = new getimages(partid,part,image);
                                 imagelist.add(get);
                             }
 //                            Timer timer = new Timer();
@@ -212,7 +213,10 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                 @Override
                 public void onClick(View v) {
                     if(position != -1){
-                        Toast.makeText(getActivity(),"clicked \t"+ get.getImagename(),Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(getActivity(),Menulist.class);
+                        i.putExtra("partner",get.getPartid());
+                        i.putExtra("title",get.getImagename());
+                        startActivity(i);
                 }
             }});
 
@@ -229,15 +233,20 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
 
     //vpGetter
     class getimages{
-        String imagename,image;
+        int partid;
+        String part,image;
 
-        public getimages(String imagename,String image) {
-            this.imagename = imagename;
+        public getimages(int partid,String part,String image) {
+            this.partid = partid;
+            this.part = part;
             this.image = image;
+        }
+        public int getPartid() {
+            return partid;
         }
 
         public String getImagename() {
-            return imagename;
+            return part;
         }
 
         public String getImage() {
@@ -259,10 +268,10 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                             for (int i = 0; i < json.length(); i++) {
                                 JSONObject jsonObject = json.getJSONObject(i);
 
-                                int itemId = jsonObject.getInt("itemId");
-                                String itemName = jsonObject.getString("itemName");
-                                int itemPrice = jsonObject.getInt("itemPrice");
-                                String Sdesc = jsonObject.getString("desc");
+                                int itemId = jsonObject.getInt("Item_id");
+                                String itemName = jsonObject.getString("Item_name");
+                                int itemPrice = jsonObject.getInt("Item_price");
+                                String Sdesc = jsonObject.getString("part");
                                 String Simage = jsonObject.getString("specials");
 
                                 getSpecials spec = new getSpecials(itemId,itemName,itemPrice,Sdesc,Simage);
@@ -335,7 +344,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                     if(checkcart){
                         operate.removeFromCart(get.getItemId());
                         ((addOrRemove)getActivity()).onRemoveProduct();
-                        Toast.makeText(getActivity(), get.getItemName()+" removed to cart", Toast.LENGTH_SHORT).show();}
+                        Toast.makeText(getActivity(), get.getItemName()+" removed from cart", Toast.LENGTH_SHORT).show();}
                     else{
                         operate.addCartItem(get.getItemId(),get.getItemName(),get.getItemPrice(),get.getSpecialSdesc());
                         ((addOrRemove)getActivity()).onAddProduct();
@@ -398,10 +407,10 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                             for (int i = 0; i < json.length(); i++) {
                                 JSONObject jsonObject = json.getJSONObject(i);
 
-                                int itemId = jsonObject.getInt("itemId");
-                                String itemName = jsonObject.getString("itemName");
-                                int itemPrice = jsonObject.getInt("itemPrice");
-                                String bestpatner = jsonObject.getString("partner");
+                                int itemId = jsonObject.getInt("Item_id");
+                                String itemName = jsonObject.getString("Item_name");
+                                int itemPrice = jsonObject.getInt("Item_price");
+                                String bestpatner = jsonObject.getString("part");
                                 String bestimages = jsonObject.getString("best_sales");
 
                                 getBestDetails getbest = new getBestDetails(itemId,itemName,itemPrice,bestpatner, bestimages);
@@ -459,7 +468,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
 //                        ivitemcart.setImageResource(R.drawable.cartno);
                         operate.removeFromCart(getbest.getItemId());
                         ((addOrRemove)getActivity()).onRemoveProduct();
-                        Toast.makeText(getActivity(), getbest.getItemName()+" removed to cart", Toast.LENGTH_SHORT).show();}
+                        Toast.makeText(getActivity(), getbest.getItemName()+" removed from cart", Toast.LENGTH_SHORT).show();}
                     else{
 //                        ivitemcart.setImageResource(R.drawable.cartyes);
                         operate.addCartItem(getbest.getItemId(),getbest.getItemName(),getbest.getItemPrice(),getbest.getPartnername());
@@ -528,6 +537,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
         public int getItemPrice() {
             return itemPrice;
         }
+
         public String getPartnername() {
             return bestpatner;
         }
