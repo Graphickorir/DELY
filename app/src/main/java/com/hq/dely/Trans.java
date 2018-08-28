@@ -49,7 +49,15 @@ public class Trans extends AppCompatActivity {
         setContentView(R.layout.activity_trans);
         translist = new ArrayList<>();
         tpbar = (ProgressBar) findViewById(R.id.tpbar);
+        ImageView ivdepo = (ImageView) findViewById(R.id.ivdepo);
 
+        ivdepo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Trans.this,Deposit.class);
+                startActivity(i);
+            }
+        });
         transbal = (TextView) findViewById(R.id.transbal);
         rvtrans = (RecyclerView) findViewById(R.id.rvtrans);
         rvtrans.setLayoutManager(new LinearLayoutManager(this));
@@ -60,7 +68,7 @@ public class Trans extends AppCompatActivity {
     //Volley LOAD TRANS
     public void loadTrans() {
         tpbar.setVisibility(View.VISIBLE);
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/translist.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/translist.php";
         final int id = this.getSharedPreferences("MySharedPrefs",Context.MODE_PRIVATE).getInt("Id",0);
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -68,7 +76,6 @@ public class Trans extends AppCompatActivity {
                     public void onResponse(String response) {
                         tpbar.setVisibility(View.INVISIBLE);
                         try {
-                            Log.e("response", "onResponse: "+response );
                             JSONArray json = new JSONArray(response);
                             for (int i = 0; i < json.length(); i++) {
                                 JSONObject jsonObject = json.getJSONObject(i);
@@ -133,7 +140,7 @@ public class Trans extends AppCompatActivity {
 
     //Volley load spinner
     public void loadSpinner(final String num,final List<getSpinItems> spindata) {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/spinner.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/spinner.php";
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
                     @Override

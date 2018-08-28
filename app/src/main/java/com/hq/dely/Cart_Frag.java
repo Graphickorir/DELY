@@ -47,8 +47,7 @@ public class Cart_Frag extends Fragment {
     TextView tvcartcomp,tvcartaddress,tvcartpay,tvtotal,tvchangeaddress,tvchangepay;
     Button btcart;
 
-    int userId;
-    int total;
+    int userId,total,coid = 0;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,10 +65,10 @@ public class Cart_Frag extends Fragment {
 
             tvcartcomp = (TextView) rootView.findViewById(R.id.tvcartcomp);
             tvcartaddress = (TextView) rootView.findViewById(R.id.tvcartaddress);
-            tvcartpay = (TextView) rootView.findViewById(R.id.tvcartpay);
+//            tvcartpay = (TextView) rootView.findViewById(R.id.tvcartpay);
             tvtotal = (TextView) rootView.findViewById(R.id.tvtotal);
             tvchangeaddress = (TextView) rootView.findViewById(R.id.tvchangeaddress);
-            tvchangepay = (TextView) rootView.findViewById(R.id.tvchangepay);
+//            tvchangepay = (TextView) rootView.findViewById(R.id.tvchangepay);
             btcart = (Button) rootView.findViewById(R.id.btcart);
 
             rvcart = (RecyclerView) rootView.findViewById(R.id.rvcart);
@@ -95,14 +94,14 @@ public class Cart_Frag extends Fragment {
                 }
             });
 
-            tvchangepay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(getActivity(),SignUp.class);
-                    i.putExtra("Tab",2);
-                    startActivity(i);
-                }
-            });
+//            tvchangepay.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent i = new Intent(getActivity(),SignUp.class);
+//                    i.putExtra("Tab",2);
+//                    startActivity(i);
+//                }
+//            });
 
             btcart.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -124,7 +123,7 @@ public class Cart_Frag extends Fragment {
                                     .setCancelable(true)
                                     .create()
                                     .show();
-                        }else {
+                        }else{
                             Toast.makeText(getActivity(), "Login First To Order", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -141,7 +140,7 @@ public class Cart_Frag extends Fragment {
 
     //order
     public void loadorders() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/orders.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/orders.php";
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -197,6 +196,7 @@ public class Cart_Frag extends Fragment {
                         JSONObject suborder = new JSONObject();
                         getCartItems getdetails = getAllCart().get(i);
                         suborder.put("User",userId+"");
+                        suborder.put("Coid",coid+"");
                         suborder.put("Part",getdetails.cartpart);
                         suborder.put("Item",getdetails.cartid+"");
                         suborder.put("Total",total+"");
@@ -215,7 +215,7 @@ public class Cart_Frag extends Fragment {
 
     //Combo Volley
     public void loaduserdetails() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/cartdetails.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/cartdetails.php";
         final String User = getActivity().getSharedPreferences("MySharedPrefs",Context.MODE_PRIVATE).getString("Username",null);
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
@@ -227,15 +227,16 @@ public class Cart_Frag extends Fragment {
                             if (jobject.getString("messo") == "0") {
                                 tvcartcomp.setText("Not set");
                                 tvcartaddress.setText("Not set");
-                                tvcartpay.setText("Not set");
+//                                tvcartpay.setText("Not set");
 
                                 tvchangeaddress.setText("set company");
-                                tvchangepay.setText("set method");
+//                                tvchangepay.setText("set method");
                             }
                             else if (jobject.getString("messo") == "1"){
+                                coid = jobject.getInt("coid");
                                 tvcartcomp.setText(""+jobject.getString("Company"));
                                 tvcartaddress.setText(""+jobject.getString("Address"));
-                                tvcartpay.setText(""+jobject.getString("Method"));
+//                                tvcartpay.setText(""+jobject.getString("Method"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

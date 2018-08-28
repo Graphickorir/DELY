@@ -131,7 +131,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void registerUser() {
-        String REG_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/Reg.php";
+        String REG_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/Reg.php";
         int chosen = rggender.getCheckedRadioButtonId();
         RadioButton rb = (RadioButton) rggender.findViewById(chosen);
 

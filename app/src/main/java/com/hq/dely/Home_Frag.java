@@ -93,6 +93,9 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
         getSpecialsItems();
         loadImages();
 
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new vpTimer(),2000,5000);
+
         return rootView;}
         else {
             View rootView = inflater.inflate(R.layout.fraghomenet, container, false);
@@ -108,18 +111,6 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
         }
     }
 
-//    //vpTimer
-//    public class vpTimer extends TimerTask{
-//        @Override
-//        public void run() {
-//            vphome.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    vphome.setCurrentItem((vphome.getCurrentItem() + 1) % imagelist.size(), false);
-//                }
-//            });
-//        }
-//    }
 
     //implementing onclick
     @Override
@@ -132,7 +123,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
     //Home automatic viewpager
     //vpvolley
     private void loadImages() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/slider.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/slider.php";
         vppbar.setVisibility(View.VISIBLE);
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -152,8 +143,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                                 getimages get = new getimages(partid,part,image);
                                 imagelist.add(get);
                             }
-//                            Timer timer = new Timer();
-//                            timer.scheduleAtFixedRate(new vpTimer(),2000,5000);
+
 
                             VpAdapter vpAdapter = new VpAdapter(imagelist);
                             vphome.setAdapter(vpAdapter);
@@ -173,6 +163,19 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
                     }
                 });
         Singleton.getmInstance(getActivity()).addToRequestQueue(sRequest);
+    }
+
+    //vpTimer
+    public class vpTimer extends TimerTask{
+        @Override
+        public void run() {
+            vphome.post(new Runnable() {
+                @Override
+                public void run() {
+                    vphome.setCurrentItem((vphome.getCurrentItem() + 1) % 6, false);
+                }
+            });
+        }
     }
 
     //vpAdapter
@@ -257,7 +260,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
     //Home specials gridview
     //volley
     public void getSpecialsItems(){
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/specials.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/specials.php";
 
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -396,7 +399,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
     //Home bestsales
     //Volley
     public void loadBest() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/bestsales.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/bestsales.php";
 
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {

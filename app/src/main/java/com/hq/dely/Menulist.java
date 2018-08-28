@@ -143,7 +143,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
 
     //Bevarages Volley 192.168.56.1
     public void loadbevitems() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/listitems.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/listitems.php";
         final int cat = 1;
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -226,7 +226,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
 
     //Meals Volley
     public void loadmealsitems() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/listitems.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/listitems.php";
         final int cat = 2;
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
@@ -309,7 +309,7 @@ public class Menulist extends AppCompatActivity implements addOrRemove,Toolbar.O
 
     //Combo Volley
     public void loadcomboitems() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/listitems.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/listitems.php";
         final int cat = 3;
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,

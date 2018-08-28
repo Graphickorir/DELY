@@ -195,9 +195,11 @@ public class Home extends AppCompatActivity implements addOrRemove, Toolbar.OnMe
 
     //volley check balance
     private void checkBal() {
+        subname.setTitle("User: Loading...");
+        subbalance.setTitle("Bal: Loading...");
         final int id = this.getSharedPreferences(
                 "MySharedPrefs", Context.MODE_PRIVATE).getInt("Id",0);
-            final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/getbal.php";
+            final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/getbal.php";
             StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                     new Response.Listener<String>() {
                         @Override

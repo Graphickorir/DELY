@@ -110,7 +110,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     }
     private void getSecurityAns(){
         final String email = etemail.getText().toString();
-        String LOGIN_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/forgot.php";
+        String LOGIN_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/forgot.php";
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, LOGIN_ROOT_URL,
                 new Response.Listener<String>() {
@@ -178,7 +178,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private void loginUser() {
         final String Username = etuser.getText().toString();
         final String Password = etpass.getText().toString();
-        String LOGIN_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/Login.php";
+        String LOGIN_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/Login.php";
         pbar.setVisibility(View.VISIBLE);
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, LOGIN_ROOT_URL,

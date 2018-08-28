@@ -61,7 +61,7 @@ public class List_Frag extends Fragment {
 
     //Volley
     public void loadPartners() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/listrv.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/listrv.php";
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -146,18 +146,17 @@ public class List_Frag extends Fragment {
                     custombuilder = new AlertDialog.Builder(getActivity());
                     LayoutInflater inflater = getActivity().getLayoutInflater();
                     View dialogView = inflater.inflate(R.layout.custom_alertlist_frag, null);
-                    custombuilder.setTitle("Rate"+title)
+                    custombuilder.setTitle("Rate: "+title)
                             .setView(dialogView)
                             .setCancelable(true);
                     ImageView alertiv = (ImageView) dialogView.findViewById(R.id.alertiv);
-//                    Button alertbt = (Button) dialogView.findViewById(R.id.alertbt);
                     final RatingBar alertrb = (RatingBar) dialogView.findViewById(R.id.alertrb);
                     final TextView alerttv = (TextView) dialogView.findViewById(R.id.alerttv);
                     Glide.with(getActivity())
                             .load(getdetails.getRestlogo())
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(alertiv);
-                    alerttv.setText("Rate "+title);
+                    alerttv.setText("Rate");
                     custombuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -260,7 +259,7 @@ public class List_Frag extends Fragment {
     }
 
     public void setRating(final Float rating,final int partid){
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/korirphp/rating.php";
+        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/rating.php";
         final int userid = getActivity().getSharedPreferences("MySharedPrefs", Context.MODE_PRIVATE).getInt("Id",0);
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -268,8 +267,15 @@ public class List_Frag extends Fragment {
                     public void onResponse(String response) {
                         try {
                             JSONObject jobject = new JSONObject(response);
-                            if(jobject.getString("messo") == "1"){
+                            if(jobject.getString("messo").equals("1")){
                                 Toast.makeText(getActivity(), "Rating set successfully", Toast.LENGTH_LONG).show();
+                                customalert.cancel();
+                            }
+                            if(jobject.getString("messo").equals("2")){
+                                Toast.makeText(getActivity(), "Rating not set try later", Toast.LENGTH_LONG).show();
+                                customalert.cancel();
+                            }if(jobject.getString("messo").equals("3")){
+                                Toast.makeText(getActivity(), "Please order from the restaurant to rate it", Toast.LENGTH_LONG).show();
                                 customalert.cancel();
                             }
                         } catch (JSONException e) {

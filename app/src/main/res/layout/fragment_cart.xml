@@ -61,52 +61,52 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/lvpay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_below="@+id/lvaddress"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tvpay"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:padding="3dp"
-            android:layout_marginEnd="10dp"
-            android:textColor="@color/colorPrimary"
-            android:text="PAYMENT METHOD : "/>
-        <TextView
-            android:id="@+id/tvcartpay"
-            android:layout_width="300dp"
-            android:layout_height="25dp"
-            android:padding="3dp"
-            android:layout_marginEnd="10dp"
-            android:layout_toRightOf="@+id/tvpay"
-            android:text="MPESA"/>
-        <TextView
-            android:id="@+id/tvchangepay"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:padding="3dp"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/colorPrimary"
-            android:text="Change"/>
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/lvpay"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="5dp"-->
+        <!--android:layout_below="@+id/lvaddress"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:orientation="horizontal">-->
+        <!--<TextView-->
+            <!--android:id="@+id/tvpay"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:padding="3dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:text="PAYMENT METHOD : "/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/tvcartpay"-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:padding="3dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_toRightOf="@+id/tvpay"-->
+            <!--android:text="MPESA"/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/tvchangepay"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:padding="3dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:text="Change"/>-->
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dip"
-            android:layout_below="@+id/tvcartpay"
-            android:background="@color/colorPrimary" />
-    </RelativeLayout>
+        <!--<View-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dip"-->
+            <!--android:layout_below="@+id/tvcartpay"-->
+            <!--android:background="@color/colorPrimary" />-->
+    <!--</RelativeLayout>-->
 
 
 
     <LinearLayout
     android:id="@+id/lvnotloged"
     android:layout_width="match_parent"
-    android:layout_height="115dp"
+    android:layout_height="70dp"
     android:layout_centerHorizontal="true"
     android:padding="5dp"
     android:background="@color/blackshade"
@@ -116,7 +116,7 @@
         android:layout_height="40dp"
         android:padding="5dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:text="PLEASE LOG IN FIRST"
         android:textStyle="bold"
         android:textColor="@color/white"
@@ -128,7 +128,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/lvpay"
+        android:layout_below="@+id/lvaddress"
         android:background="@color/blackhex"/>
 
     <RelativeLayout

@@ -1,8 +1,10 @@
 package com.hq.dely;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class Splash extends AppCompatActivity {
 
@@ -16,6 +18,9 @@ public class Splash extends AppCompatActivity {
             startActivity(new Intent(this,Home.class));
             return;
         }
+        TextView tvsplash = (TextView) findViewById(R.id.tvsplash);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Lobster.otf");
+        tvsplash.setTypeface(custom_font);
 
         Thread timer =new Thread(){
             @Override
