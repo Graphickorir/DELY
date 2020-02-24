@@ -67,7 +67,7 @@ public class Deposit extends AppCompatActivity {
     //Volley Deposit
     public void depositfunds() {
         dpbar.setVisibility(View.VISIBLE);
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/deposit.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/deposit.php";
         final int id = this.getSharedPreferences("MySharedPrefs",Context.MODE_PRIVATE).getInt("Id",0);
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {

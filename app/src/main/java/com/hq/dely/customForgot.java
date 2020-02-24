@@ -67,7 +67,7 @@ public class customForgot extends AppCompatActivity implements View.OnClickListe
         final String pass = etforpass.getText().toString();
         Intent i = getIntent();
         final String Email = i.getStringExtra("Email");
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/updatepass.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/updatepass.php";
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {

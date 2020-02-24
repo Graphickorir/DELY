@@ -140,7 +140,7 @@ public class Cart_Frag extends Fragment {
 
     //order
     public void loadorders() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/orders.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/orders.php";
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -215,7 +215,7 @@ public class Cart_Frag extends Fragment {
 
     //Combo Volley
     public void loaduserdetails() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/cartdetails.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/cartdetails.php";
         final String User = getActivity().getSharedPreferences("MySharedPrefs",Context.MODE_PRIVATE).getString("Username",null);
 
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,

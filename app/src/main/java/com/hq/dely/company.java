@@ -75,7 +75,7 @@ public class company extends Fragment implements Toolbar.OnMenuItemClickListener
 
     //Volley
     public void loadCompanies() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/delyco.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/delyco.php";
         copbar.setVisibility(View.VISIBLE);
 
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
@@ -155,7 +155,7 @@ public class company extends Fragment implements Toolbar.OnMenuItemClickListener
             holder.setclicker(new rvListener() {
                 @Override
                 public void onClick(View view, int position) {
-                    final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/co_id.php";
+                    final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/co_id.php";
                     final String Username=getActivity().getSharedPreferences("MySharedPrefs",Context.MODE_PRIVATE).getString("Username",null);
                     final int Id_Co = getdetails.getId();
 

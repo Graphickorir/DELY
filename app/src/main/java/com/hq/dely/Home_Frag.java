@@ -123,7 +123,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
     //Home automatic viewpager
     //vpvolley
     private void loadImages() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/slider.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/slider.php";
         vppbar.setVisibility(View.VISIBLE);
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -260,7 +260,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
     //Home specials gridview
     //volley
     public void getSpecialsItems(){
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/specials.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/specials.php";
 
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -399,7 +399,7 @@ public class Home_Frag extends Fragment implements View.OnClickListener{
     //Home bestsales
     //Volley
     public void loadBest() {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/bestsales.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/bestsales.php";
 
         StringRequest sRequest = new StringRequest(Request.Method.GET, CO_ROOT_URL,
                 new Response.Listener<String>() {

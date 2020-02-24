@@ -90,7 +90,7 @@ public class PayMethod extends Fragment implements View.OnClickListener{
         final int method = rbid;
         final String Username = getActivity().getSharedPreferences("MySharedPrefs", Context.MODE_PRIVATE).getString("Username",null);
 
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/paymethod.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/paymethod.php";
 
         paypbar.setVisibility(View.VISIBLE);
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,

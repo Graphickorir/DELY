@@ -103,7 +103,7 @@ public class Profile_Frag extends Fragment implements View.OnClickListener{
     }
 
     private void changeEmail(){
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/changeemail.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/changeemail.php";
         final String user = getActivity().getSharedPreferences("MySharedPrefs", Context.MODE_PRIVATE).getString("Username",null);
         final String email = etproemail.getText().toString();
 
@@ -163,7 +163,7 @@ public class Profile_Frag extends Fragment implements View.OnClickListener{
     }
 
     private void changePhone(){
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/changephone.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/changephone.php";
         final String user = getActivity().getSharedPreferences("MySharedPrefs", Context.MODE_PRIVATE).getString("Username",null);
         final int phone = Integer.parseInt(etprophone.getText().toString());
 
@@ -223,7 +223,7 @@ public class Profile_Frag extends Fragment implements View.OnClickListener{
     }
 
     private void changePass(){
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/changepass.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/changepass.php";
         final String user = getActivity().getSharedPreferences("MySharedPrefs", Context.MODE_PRIVATE).getString("Username",null);
         final String pass = etpronewpass.getText().toString();
 

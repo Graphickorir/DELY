@@ -68,7 +68,7 @@ public class Trans extends AppCompatActivity {
     //Volley LOAD TRANS
     public void loadTrans() {
         tpbar.setVisibility(View.VISIBLE);
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/translist.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/translist.php";
         final int id = this.getSharedPreferences("MySharedPrefs",Context.MODE_PRIVATE).getInt("Id",0);
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
@@ -140,7 +140,7 @@ public class Trans extends AppCompatActivity {
 
     //Volley load spinner
     public void loadSpinner(final String num,final List<getSpinItems> spindata) {
-        final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/spinner.php";
+        final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/spinner.php";
         StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                 new Response.Listener<String>() {
                     @Override

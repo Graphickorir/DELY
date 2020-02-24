@@ -90,8 +90,8 @@ public class Home extends AppCompatActivity implements addOrRemove, Toolbar.OnMe
         navview.setNavigationItemSelectedListener(this);
         View headerView = navview.getHeaderView(0);
         navdely = (TextView) headerView.findViewById(R.id.navdely);
-        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Lobster.otf");
-        navdely.setTypeface(custom_font);
+//        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Lobster.otf");
+//        navdely.setTypeface(custom_font);
 
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -199,7 +199,7 @@ public class Home extends AppCompatActivity implements addOrRemove, Toolbar.OnMe
         subbalance.setTitle("Bal: Loading...");
         final int id = this.getSharedPreferences(
                 "MySharedPrefs", Context.MODE_PRIVATE).getInt("Id",0);
-            final String CO_ROOT_URL = "http://"+getResources().getString(R.string.url)+"/dely/delyapp/getbal.php";
+            final String CO_ROOT_URL = "https://"+getResources().getString(R.string.url)+"/getbal.php";
             StringRequest sRequest = new StringRequest(Request.Method.POST, CO_ROOT_URL,
                     new Response.Listener<String>() {
                         @Override

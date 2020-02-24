@@ -18,9 +18,9 @@ public class Splash extends AppCompatActivity {
             startActivity(new Intent(this,Home.class));
             return;
         }
-        TextView tvsplash = (TextView) findViewById(R.id.tvsplash);
-        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Lobster.otf");
-        tvsplash.setTypeface(custom_font);
+//        TextView tvsplash = (TextView) findViewById(R.id.tvsplash);
+//        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Lobster.otf");
+//        tvsplash.setTypeface(custom_font);
 
         Thread timer =new Thread(){
             @Override
